@@ -1,0 +1,49 @@
+{
+  "id": "die-werkstatt",
+  "number": 5,
+  "title": "Die Werkstatt",
+  "subtitle": "Du beschreibst es, und dann gibt es das",
+  "estMinutes": 35,
+  "twoSeater": false,
+  "intro": {
+    "markdown": "Vier Wochen lang hast du geprüft, sortiert und umformuliert. Jetzt baust du.\n\nDu beschreibst eine kleine Sache — ein Spiel, einen Zähler, ein Werkzeug — und sie entsteht. Kein Code, keine Datei, kein Editor. Du sagst, was sie tun soll.\n\nDann sagst du, was anders werden soll. \"Mach die Knöpfe lila.\" \"Bau einen Timer ein.\" \"Zu schnell.\" Jede Fassung wird aufgehoben, zusammen mit dem Satz, der sie gebaut hat. Du kannst zurückblättern.\n\nDas ist der eigentliche Trick an dieser Woche: in vier Wochen schaust du dir deine alten Sätze an und siehst, dass du inzwischen anders fragst.\n\nWas hier entsteht, läuft in einem geschlossenen Kasten. Es kann nicht ins Internet und nichts auf dem Rechner anfassen. Wenn es kaputt ist, ist nur es selbst kaputt.",
+    "illustrationPrompt": "Eine Werkbank mit Zirkel, Lineal und einem halbfertigen Modellschiff, Bauplan darunter"
+  },
+  "stations": [
+    {
+      "id": "bau-was",
+      "type": "werkstatt",
+      "title": "Bau was",
+      "intro": "Beschreib, was entstehen soll. Danach sagst du, was anders werden muss — so oft du willst.",
+      "scaffold": "Baue genau das Beschriebene. Halte es klein und funktionsfähig. Beschrifte alles auf Deutsch.",
+      "ideas": [
+        "Ein Würfel, der eine Zahl von 1 bis 20 zeigt",
+        "Ein Zähler für Liegestütze mit einem grossen Knopf",
+        "Ein Zufallsgenerator, der aussucht, wer abwaschen muss",
+        "Eine Stoppuhr fürs Zähneputzen mit zwei Minuten",
+        "Ein Vokabeltrainer mit fünf Wörtern, die du eingibst",
+        "Ein Farbmischer mit drei Schiebereglern",
+        "Ein kleines Spiel: klick den Punkt, bevor er verschwindet"
+      ],
+      "seeds": [
+        {
+          "label": "Ein Würfel",
+          "prompt": "Bau mir einen Würfel. Ein grosser Knopf, und dann erscheint eine Zahl von 1 bis 6 ganz gross in der Mitte."
+        },
+        {
+          "label": "Eine Stoppuhr",
+          "prompt": "Bau eine Stoppuhr für zwei Minuten zum Zähneputzen. Sie soll rückwärts zählen und am Ende die Farbe wechseln."
+        }
+      ],
+      "success": "Du hast etwas gebaut, mindestens zweimal geändert und es jemandem gezeigt."
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Was hat beim ersten Versuch nicht geklappt?",
+      "Welcher deiner Sätze hat am meisten verändert?",
+      "Schau in die Galerie: fragst du heute anders als vor vier Wochen?"
+    ],
+    "parentNote": "Das ist die Woche, die sie jemandem zeigen will. Plan ein, dass sie es dir vorführt — Ziel 4 der ganzen Sache ist \"hat drei Dinge gebaut und hergezeigt\", nicht \"hat drei Dinge gebaut\".\n\nFreie Modelle scheitern beim Code öfter als beim Reden. Wenn eine Fassung nicht läuft, versucht die App es automatisch noch einmal und danach mit einem stärkeren Modell. Das steht im Kapitäns-Deck unter Eskalationen — das ist die einzige Station, die regelmässig Geld kostet, und dort siehst du wie viel.\n\nSie sieht nie Code. Das ist Absicht: sie soll lernen, wie sich Modelle verhalten, nicht Juniorentwicklerin werden."
+  }
+}

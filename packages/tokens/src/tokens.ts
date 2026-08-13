@@ -9,36 +9,44 @@
 /**
  * Raw values. Not for use in components — they carry no meaning, so a change
  * here is a change to "what colour is this", not "what is this colour for".
+ *
+ * The Segel palette is a harbour chart: nautical instrument, not cartoon
+ * boat. Deep harbour navy as the night ground, aged chart paper by day,
+ * signal orange for actions, brass for earned things, sea-glass for a
+ * correct answer or a caught error.
  */
 const scale = {
-  white: "#ffffff",
-  zinc50: "#fafafa",
-  zinc200: "#e4e4e7",
-  zinc400: "#a1a1aa",
-  zinc600: "#52525b",
-  zinc800: "#27272a",
-  zinc900: "#18181b",
-  blue400: "#60a5fa",
-  blue600: "#2563eb",
-  red400: "#f87171",
-  red600: "#dc2626",
-  green400: "#4ade80",
-  green600: "#16a34a",
+  navy: "#12263a",
+  navyRaised: "#1b3349",
+  navyLine: "#2b4a5e",
+  paper: "#ede3d0",
+  paperRaised: "#f6efe1",
+  paperLine: "#d8c9ac",
+  inkMuted: "#4e6172",
+  paperMuted: "#9db0be",
+  signalOrange: "#e8622c",
+  signalOrangeDeep: "#c74a17",
+  brass: "#c9a227",
+  brassDeep: "#8f7419",
+  seaGlass: "#5fa8a0",
+  seaGlassDeep: "#3d7d75",
+  flagRed: "#b3261e",
+  flagRedSoft: "#e2685c",
 } as const
 
 /** Semantic colours. Each names a job, and carries a value per scheme. */
 export const color = {
-  bg: { light: scale.zinc50, dark: scale.zinc900 },
-  surface: { light: scale.white, dark: scale.zinc800 },
-  fg: { light: scale.zinc900, dark: scale.zinc50 },
-  muted: { light: scale.zinc600, dark: scale.zinc400 },
-  border: { light: scale.zinc200, dark: scale.zinc800 },
-  accent: { light: scale.blue600, dark: scale.blue400 },
-  danger: { light: scale.red600, dark: scale.red400 },
-  // A third state distinct from accent and danger — health dots, "saved"
-  // banners. The marketplace grew this token first; the template carries it
-  // now so every theme and every scaffolded app has it from the start.
-  success: { light: scale.green600, dark: scale.green400 },
+  bg: { light: scale.paper, dark: scale.navy },
+  surface: { light: scale.paperRaised, dark: scale.navyRaised },
+  fg: { light: scale.navy, dark: scale.paper },
+  muted: { light: scale.inkMuted, dark: scale.paperMuted },
+  border: { light: scale.paperLine, dark: scale.navyLine },
+  accent: { light: scale.signalOrangeDeep, dark: scale.signalOrange },
+  danger: { light: scale.flagRed, dark: scale.flagRedSoft },
+  success: { light: scale.seaGlassDeep, dark: scale.seaGlass },
+  // Earned things only — stamps in the Logbuch, finished voyages. If brass
+  // starts decorating buttons it stops meaning anything.
+  brass: { light: scale.brassDeep, dark: scale.brass },
 } as const
 
 export const space = {
@@ -74,7 +82,13 @@ export const fontWeight = {
 } as const
 
 export const fontFamily = {
-  sans: "ui-sans-serif, system-ui, sans-serif",
+  // Body: a high-legibility humanist sans at generous size — she reads
+  // fluently but not fast.
+  sans: "'Seravek', 'Avenir Next', 'Segoe UI', Verdana, system-ui, sans-serif",
+  // Display: condensed grotesque, chart-label feel. Headings and station
+  // names only.
+  display:
+    "'Avenir Next Condensed', 'Helvetica Neue Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif",
   mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
 } as const
 

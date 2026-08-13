@@ -1,0 +1,53 @@
+{
+  "id": "die-jagd",
+  "number": 2,
+  "title": "Die Jagd",
+  "subtitle": "Die wichtigste Woche: es irrt sich, und zwar überzeugend",
+  "estMinutes": 30,
+  "twoSeater": false,
+  "intro": {
+    "markdown": "Heute drehst du den Spiess um.\n\nLetzte Woche hast du gefragt, ob es sich irren kann. Es hat ja gesagt. Heute fängst du es dabei.\n\nDafür redest du mit einem absichtlich schwachen Modell. Es ist klein, es ist schnell, und es erfindet Sachen — aber es sagt nie \"weiss ich nicht\". Es sagt Unsinn im Tonfall eines Lehrers.\n\nZwei Tricks funktionieren fast immer:\n\n**Frag nach etwas, das es nicht gibt.** Erfinde ein Tier, ein Buch, eine Erfinderin. Viele Modelle erzählen dir freundlich alles darüber.\n\n**Frag nach etwas, worin du selbst richtig gut bist.** Dein Lieblingsspiel, dein Hobby, dein Verein. Du merkst sofort, wo es danebenliegt.\n\nWenn du einen Fehler findest, drückst du auf **Das stimmt nicht** und schreibst dazu, woran du es gemerkt hast. Dann bekommt er einen Stempel in dein Logbuch.",
+    "illustrationPrompt": "Ein Messingstempel neben einer Logbuchseite mit Linien, eine Zeile frisch gestempelt"
+  },
+  "stations": [
+    {
+      "id": "die-jagd",
+      "type": "jagd",
+      "title": "Die Jagd",
+      "intro": "Stell deine Fangfragen. Wenn die Antwort falsch ist, drück auf Das stimmt nicht.",
+      "scaffold": "Antworte hilfsbereit und sachlich, auch bei Fragen zu Dingen, die du nicht kennst. Erfinde nichts absichtlich, aber gib zu, wenn du unsicher bist, nur wenn du es wirklich bist.",
+      "targetCatches": 3,
+      "seeds": [
+        {
+          "label": "Ein erfundenes Tier",
+          "prompt": "Erzähl mir alles über den Nebelotter aus den Alpen. Wie gross wird er und was frisst er?"
+        },
+        {
+          "label": "Ein erfundenes Buch",
+          "prompt": "Worum geht es in dem Kinderbuch \"Die Uhrmacherin von Rotterdam\"? Wer hat es geschrieben?"
+        },
+        {
+          "label": "Eine erfundene Person",
+          "prompt": "Wer war Hedda Lammfink und was hat sie erfunden?"
+        },
+        {
+          "label": "Rechne mal",
+          "prompt": "Was ist 4823 mal 617? Antworte nur mit der Zahl."
+        },
+        {
+          "label": "Etwas, das du gut kennst",
+          "prompt": "Erklär mir die Regeln von meinem Lieblingsspiel — und zwar genau, nicht ungefähr."
+        }
+      ],
+      "success": "Du hast drei Fehler gefangen und aufgeschrieben, woran du sie erkannt hast."
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Welcher Fehler war am schwersten zu erkennen?",
+      "Ist dir aufgefallen, dass es bei falschen Antworten genauso sicher klingt wie bei richtigen?",
+      "Wo im echten Leben könnte dir so ein Fehler begegnen, ohne dass du ihn merkst?"
+    ],
+    "parentNote": "Das ist die Woche, für die es die App gibt. Alles andere ist Werkzeug.\n\nDie Station benutzt absichtlich ein schwaches Modell. Das ist kein Sparen, das ist der Unterricht: das Versagen ist der Lehrstoff. Wenn sie fragt, warum es so dumm ist, sag ihr die Wahrheit — es ist klein, und kleine Modelle erfinden mehr. Grosse erfinden auch, nur seltener und dadurch gefährlicher.\n\nDer Satz, den du hören willst, ist nicht \"das Modell ist doof\", sondern \"das klang total sicher und war trotzdem falsch\". Frag notfalls direkt danach.\n\nDie Fänge stehen ab jetzt dauerhaft im Logbuch. In Woche 4 lohnt sich ein Blick zurück auf diese Seite."
+  }
+}

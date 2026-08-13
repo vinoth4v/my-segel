@@ -6,34 +6,170 @@ that is SESSIONS.md's job.
 
 ## Purpose
 
-A guided AI literacy app for one 10-year-old and her father. Kompass gateway for the model roster, Claude for the seat next to her.
+A guided AI-literacy app for one 10-year-old and her father. Six weeks of
+curriculum, in German, whose subject is that a language model is a confident
+pattern-matcher that is frequently and plausibly wrong.
+
+The pedagogy constrains the engineering in ways that look like bugs if you do
+not know them. Two examples, both load-bearing: `jagd` is pinned to a *weak*
+model because the failure is the lesson, and `labor` must run both halves of
+its comparison on the *same* model or the station measures the wrong thing.
+Neither would survive a well-meaning optimisation pass, which is why both are
+covered by unit tests that say so.
 
 ## Domain model
 
-_The things this app talks about, and how they relate. Not tables — concepts._
+- **Voyage** — one week. Six of them, numbered, each with an intro, two to
+  four stations, and a debrief. Voyage 2 (Die Jagd) runs before the ones that
+  teach capability, deliberately: skepticism is installed before usefulness.
+- **Station** — one activity inside a voyage, of exactly one type:
+  `talk`, `jagd`, `zoo`, `labor`, `werkstatt`, `echt`, `quiz`. The type
+  decides which component renders it and which model serves it.
+- **Catch** — she decided a model's answer was wrong and said why. The unit
+  the whole app is judged on; a catch without her reason is not a catch.
+- **Logbuch entry** — a catch, a ranking, a build, or a note. One stream,
+  because to her it is one ledger.
+- **Artifact** — a thing she built in the Werkstatt, plus every version, each
+  keeping the sentence that produced it.
+- **Segler / Kapitän** — the learner and the parent. Two *roles*, one
+  account; see Decisions in force.
 
 ## Data model
 
-_Tables, their columns, and why they are shaped that way. Name the migration
-that introduced each one, so a schema question can be traced to its change._
+All introduced by `0001_burly_tiger_shark.sql` except `audit_log`, which came
+from the template in `0000_audit_log.sql`.
+
+- **`audit_log`** — sign-ins and failed sign-ins, including failed unlocks of
+  the parent deck. From the template, unchanged.
+- **`transcript`** — every turn: her messages and the model's, plus which
+  model was asked, which lane and concrete model answered, whether it was an
+  escalation and why, and whether a filter replaced it. Append-only, with no
+  delete path reachable from the child's surfaces.
+- **`logbuch_entry`** — `kind` (catch/ranking/build/note), her `why`, and a
+  `jsonb` payload for whatever the kind needs. One table rather than three
+  because the home page interleaves them in time order, and because a new
+  station type should not need a migration.
+- **`station_progress`** — unique on (voyage, station); progress is a state,
+  not a history. `completed_at` is only ever set, never cleared — finishing
+  something is not something the app takes back from her.
+- **`artifact`** / **`artifact_version`** — split so versions are never
+  overwritten. The prompt is stored beside the HTML because scrubbing back
+  through her own prompts is the pedagogical point of the Werkstatt, not an
+  undo feature.
+- **`app_setting`** — key/value for the caps and the kill switch. Defaults
+  live in code, so an empty table is a working app with safe limits.
+- **`usage_day`** — one row per day: active minutes, current sitting minutes,
+  last-seen timestamp, call count. One row serves both the session cap and
+  the daily cap, because a gap longer than the idle window starts a new
+  sitting.
 
 ## Surfaces
 
-_Routes, server actions and API endpoints, with what each one is for and who
-may reach it. Everything is behind the operator gate unless stated here._
+Everything requires the operator's session — the proxy is closed by default
+and nothing here is exempt beyond the template's own `/login` and `/api/auth`.
+
+| Route | For |
+|---|---|
+| `/` | The Logbuch, and the home page. Deliberately the same thing. |
+| `/reise/[voyageId]` | A voyage: intro, its stations, the debrief questions. |
+| `/reise/[voyageId]/[stationId]` | One station; dispatches to a client component by type. |
+| `/galerie`, `/galerie/[id]` | What she built, and the version scrubber. |
+| `/deck` | Kapitäns-Deck. Behind a *second* password prompt. |
+| `POST /api/station/chat` | `talk` and `jagd`. Filters, caps, transcript. |
+| `POST /api/station/zoo` | Three models concurrently, `allSettled`. Never reveals which is which. |
+| `POST /api/station/zoo/reveal` | Requires her ranking in the same request that returns the names. |
+| `POST /api/station/labor` | Both prompts, one pinned model, in one request. |
+| `POST /api/station/werkstatt` | The build loop; creates or versions an artifact. |
+| `POST /api/logbuch` | Files a catch. Requires her `why`. No cap check. |
+| `POST /api/progress` | Start/complete, for stations that need no model. |
+| `POST /api/artifact/[id]` | Set current version, mark "shown to someone". No delete. |
+
+Every route that calls a model goes through `segel/guard.ts` first, which
+checks the session and the caps. Routes that do *not* call a model — filing a
+catch, recording progress — deliberately skip the cap check: hitting the limit
+by filing a catch would punish exactly the behaviour the app exists to reward.
 
 ## External services
 
-_Databases, buckets, model lanes, third-party APIs — and which environment
-variable configures each. Anything that costs money or can fail belongs here._
+- **Kompass gateway** (`KOMPASS_BASE_URL`, `KOMPASS_TOKEN`) — every model
+  call, server-side only. `src/kompass.ts` is the only thing that reads the
+  token; `segel/router.ts` decides what to ask for.
+- **Neon Postgres** (`DATABASE_URL`) — via Drizzle, migrations checked in.
+- **Auth** (`AUTH_SECRET`, `WERFT_USER_EMAIL`, `WERFT_PASSWORD_HASH`) — the
+  single operator gate, plus the HMAC that signs the parent-deck unlock.
+
+Only the Werkstatt can cost money, and only when free models fail and it
+escalates. Every escalation is written to the transcript and listed in the
+Kapitäns-Deck, so the free-to-paid ratio is visible rather than drifting.
 
 ## Decisions in force
 
-_Choices that constrain future work, and the reason each one was made. A
-decision without its reason gets reversed by the next session that finds it
-inconvenient._
+- **Neon, not Supabase.** The spec asked for Supabase; the template ships Neon
+  with the whole preview-branch-per-PR pipeline already built around it, and
+  `@supabase/supabase-js` is not a blessed dependency. Supabase's RLS with two
+  roles buys nothing here because there is one database user and one gate.
+  Same Postgres, one less decision to raise.
+- **No `talk` route to Anthropic directly.** The spec routes `talk` to Haiku
+  direct. `AGENTS.md` forbids any provider SDK or direct call from app code,
+  without exception, so `talk` goes through the gateway on a lane. The
+  underlying concern — that the one open child-facing conversation should not
+  be served by something that ignores the safety prompt — is met by giving it
+  a *lane* rather than a pin, so the gateway always has a working chain.
+- **Pins are allowed, but only where the model *is* the requirement.** `jagd`
+  (weak on purpose), `labor` (identical both sides), `zoo` (variety is the
+  lesson). Everywhere else a lane alias, and every pin falls back to its lane
+  rather than breaking a station in front of a child.
+- **One account, two locks.** `AGENTS.md` forbids adding a second user, and a
+  real child/parent split needs a real user store. But the session in use is
+  usually *hers*, and the deck holds transcripts, caps and the kill switch —
+  so `/deck` requires re-entering the operator password, held as a
+  30-minute HMAC cookie signed with `AUTH_SECRET`. No second user, no new
+  table, and she still cannot raise her own time limit.
+- **The caps fail closed.** If the database is unreachable, no model call
+  happens. Proceeding would break two promises at once — the caps are
+  enforced server-side, and every exchange is recorded — and would break them
+  invisibly. Refusing is visibly broken, which is the better failure.
+- **The Zoo reveal is enforced at the wire.** The browser is never told which
+  model is behind A, B or C until it posts a ranking. A UI-only blind test is
+  undone by a curious ten-year-old with a devtools window.
+- **Grading is arithmetic, not a model.** The quiz has its answers in the
+  content JSON and the prompt-strength meter counts levers. Both are instant,
+  free and never wrong — and in an app about models being confidently wrong,
+  a model marking her correct answer wrong would be an unusually poor joke.
+  She is told the meter is arithmetic; that is its own small lesson.
+- **The curriculum is data.** `content/voyages/*.json`, strict Zod schema,
+  imported by name rather than read from the directory so a missing file is a
+  build error. A week can be rewritten without touching a component.
+- **The Werkstatt sandbox is `allow-scripts` and nothing else.** Adding
+  `allow-same-origin` alongside it would silently void the whole sandbox. It
+  is the easiest mistake available here, so it is written down at both call
+  sites.
+- **Markdown is rendered by a 40-line function, not a library.** No Markdown
+  parser is on the blessed list, the content uses four constructs, and the
+  renderer emits React elements rather than HTML — so a future voyage
+  authored by a model cannot inject markup into her page.
 
 ## Known gaps
 
-_What is deliberately missing or unfinished, so it is not mistaken for an
-oversight and quietly "fixed" in the wrong direction._
+- **`echt` uses hand-drawn SVG scenes, not generated images.** The gateway
+  speaks a text-completion protocol, so `flux-1-schnell` is not reachable
+  through it, and fetching images is forbidden by the app's own rules. The
+  tells taxonomy and the commit-then-reveal mechanic are intact; the pictures
+  are illustrations with the flaws built in, and more obvious than real ones.
+  The parent note admits this and points at the better exercise.
+- **No streaming.** Replies arrive whole, so the Zoo waits for the slowest of
+  three. The spec's "three models in under 8 seconds" is met by concurrency,
+  not by progressive rendering.
+- **No voice input.** The spec flags slow typing as the main friction risk in
+  Voyage 4 and it is real. Whisper through the gateway would fix it.
+- **The input filter is regex only.** The spec also wanted a small-model pass
+  for personal data. Regex is instant, free and catches the obvious cases;
+  the deeper protections are that the system prompt refuses to *collect*
+  personal data and that the parent reads every transcript.
+- **Session caps are charged per model call**, not by a heartbeat, so time
+  spent reading without asking anything is not counted. Given the anti-metric
+  is time in app, undercounting is the safer direction.
+- **Nothing has been run against a real gateway token or a real database.**
+  Every gate is green and the whole app has been walked through in a browser,
+  but with `KOMPASS_TOKEN` empty and no Neon project, so no station has
+  actually received a model's reply yet.

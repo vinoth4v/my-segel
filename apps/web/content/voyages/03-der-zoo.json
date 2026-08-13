@@ -1,0 +1,102 @@
+{
+  "id": "der-zoo",
+  "number": 3,
+  "title": "Der Modell-Zoo",
+  "subtitle": "Es gibt nicht die KI. Es gibt viele, und sie sind sich uneinig",
+  "estMinutes": 25,
+  "twoSeater": false,
+  "intro": {
+    "markdown": "Die Leute sagen \"die KI\", als wäre es ein Ding. Ist es nicht.\n\nEs gibt Dutzende. Gebaut von verschiedenen Firmen, in verschiedenen Ländern, mit verschiedenem Text gefüttert. Manche sind riesig, manche klein. Sie geben auf dieselbe Frage verschiedene Antworten — und manchmal widersprechen sie sich komplett.\n\nHeute stellst du dieselbe Frage an drei davon. Du weisst nicht, welches welches ist. Sie heissen nur A, B und C.\n\nDu liest, du sortierst, du schreibst auf, warum. **Erst dann** erfährst du, wer sie sind. Andersherum wäre es wertlos: wenn du den Namen kennst, bewertest du den Namen.",
+    "illustrationPrompt": "Drei gleich grosse Kartenfelder nebeneinander, mit A, B und C beschriftet, eines mit einer Messingnadel markiert"
+  },
+  "stations": [
+    {
+      "id": "blindverkostung",
+      "type": "zoo",
+      "title": "Blindverkostung",
+      "intro": "Eine Frage, drei Modelle. Lies alle drei, sortiere sie, schreib dazu warum.",
+      "question": "Erklär mir in höchstens fünf Sätzen, warum der Himmel blau ist. Schreib so, dass eine Zehnjährige es versteht.",
+      "scaffold": "Antworte knapp und klar. Höchstens fünf Sätze.",
+      "seeds": [
+        {
+          "label": "Warum ist der Himmel blau?",
+          "prompt": "Erklär mir in höchstens fünf Sätzen, warum der Himmel blau ist. Schreib so, dass eine Zehnjährige es versteht."
+        },
+        {
+          "label": "Was ist ein schwarzes Loch?",
+          "prompt": "Was ist ein schwarzes Loch? Höchstens fünf Sätze, für eine Zehnjährige."
+        },
+        {
+          "label": "Erfinde ein Tier",
+          "prompt": "Erfinde ein Tier, das es nicht gibt, und beschreib es in fünf Sätzen."
+        },
+        {
+          "label": "Ein Witz",
+          "prompt": "Erzähl mir einen Witz, über den eine Zehnjährige wirklich lachen kann."
+        }
+      ],
+      "success": "Du hast drei Antworten sortiert und begründet, bevor die Namen aufgedeckt wurden."
+    },
+    {
+      "id": "was-hast-du-gelernt",
+      "type": "quiz",
+      "title": "Was hast du gelernt?",
+      "intro": "Vier Fragen. Wenn du danebenliegst, steht dabei, warum.",
+      "success": "Du hast alle vier Fragen beantwortet.",
+      "questions": [
+        {
+          "id": "eine-ki",
+          "question": "Jemand sagt: \"Die KI hat gesagt, dass...\". Was fehlt in dem Satz?",
+          "options": [
+            "Nichts, das ist eindeutig",
+            "Welches Modell gemeint ist",
+            "Ob es ein Computer war"
+          ],
+          "answer": 1,
+          "why": "Es gibt viele Modelle, und sie antworten unterschiedlich. \"Die KI\" ist so ungenau wie \"das Buch hat gesagt\"."
+        },
+        {
+          "id": "widerspruch",
+          "question": "Zwei Modelle geben dir gegensätzliche Antworten. Was bedeutet das?",
+          "options": [
+            "Eines ist kaputt",
+            "Mindestens eines liegt falsch, und du musst selbst nachsehen",
+            "Man nimmt die längere Antwort"
+          ],
+          "answer": 1,
+          "why": "Widerspruch ist ein Geschenk: er zeigt dir sofort, dass du nachprüfen musst. Ohne den Widerspruch hättest du der einen Antwort einfach geglaubt."
+        },
+        {
+          "id": "gross-gleich-richtig",
+          "question": "Ist ein grösseres Modell immer richtiger?",
+          "options": [
+            "Ja, grösser ist besser",
+            "Nein, es irrt sich nur seltener — und klingt dabei noch überzeugender",
+            "Nein, grosse Modelle sind schlechter"
+          ],
+          "answer": 1,
+          "why": "Grosse Modelle erfinden seltener. Genau deshalb sind ihre Erfindungen schwerer zu erwischen."
+        },
+        {
+          "id": "blind",
+          "question": "Warum hast du erst sortiert und dann die Namen gesehen?",
+          "options": [
+            "Damit es spannender ist",
+            "Weil man sonst den bekannten Namen bewertet statt die Antwort",
+            "Damit es schneller geht"
+          ],
+          "answer": 1,
+          "why": "Das nennt man einen Blindtest. Erwachsene machen das mit Wein und mit Medikamenten, aus genau demselben Grund."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Welches hat dir am besten gefallen, und wusstest du vorher, welches es war?",
+      "Hat dich eine der Aufdeckungen überrascht?",
+      "Wenn zwei Modelle sich widersprechen — wen fragst du dann?"
+    ],
+    "parentNote": "Diese Station gibt es nur, weil hinter einem Zugang mehrere Modelle liegen. Sie ist der eigentliche Vorteil des Aufbaus, und Kinder bekommen sie sonst nirgends zu sehen.\n\nDer Lerneffekt ist nicht \"Modell X ist das beste\". Er ist: es gibt kein *das* Modell, also ist \"die KI hat gesagt\" kein Argument. Das überträgt sich direkt auf den Schulhof.\n\nWenn eine Antwort nicht kommt oder viel später eintrudelt: das ist normal und ehrlich. Freie Modelle sind manchmal überlastet. Sag ihr das, statt es zu verstecken."
+  }
+}

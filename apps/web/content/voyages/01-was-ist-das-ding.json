@@ -1,0 +1,48 @@
+{
+  "id": "was-ist-das-ding",
+  "number": 1,
+  "title": "Was ist das Ding?",
+  "subtitle": "Ein Modell ist kein Gehirn und kein Lexikon",
+  "estMinutes": 25,
+  "twoSeater": true,
+  "intro": {
+    "markdown": "Du hast bestimmt schon gehört, dass Computer jetzt reden können. Das stimmt fast.\n\nWas da redet, heisst Sprachmodell. Es hat unfassbar viel Text gelesen — Bücher, Webseiten, Kommentare — und dabei genau eine Sache gelernt: welches Wort als nächstes kommt. Mehr nicht. Es weiss nichts. Es rät sehr, sehr gut.\n\nDrei Regeln nimmst du ab heute mit:\n\n1. Es rät. Immer. Auch wenn es sicher klingt.\n2. Sicher klingen und recht haben sind zwei verschiedene Dinge.\n3. Du bist die, die nachprüft.\n\nHeute redest du zum ersten Mal mit einem. Frag es Sachen, bei denen du selbst weisst, ob die Antwort stimmt.",
+    "illustrationPrompt": "Ein Seekartenausschnitt mit einer Kompassrose, daneben eine Hand, die mit dem Zirkel nachmisst"
+  },
+  "stations": [
+    {
+      "id": "erstes-gespraech",
+      "type": "talk",
+      "title": "Das erste Gespräch",
+      "intro": "Rede mit dem Modell. Frag es etwas, worin du gut bist — dann merkst du sofort, wenn es Unsinn erzählt.",
+      "scaffold": "Das Kind spricht zum ersten Mal mit einem Sprachmodell. Erkläre auf Nachfrage ehrlich, wie du funktionierst: du sagst voraus, welches Wort als nächstes passt, und du kannst dich irren. Gib nicht vor, Gefühle oder ein Gedächtnis zu haben.",
+      "seeds": [
+        {
+          "label": "Was bist du eigentlich?",
+          "prompt": "Was bist du eigentlich, und wie funktionierst du? Erklär es mir so, dass ich es verstehe."
+        },
+        {
+          "label": "Woher weisst du das?",
+          "prompt": "Woher weisst du die Sachen, die du mir erzählst? Hast du die gelernt oder erfindest du sie?"
+        },
+        {
+          "label": "Kannst du dich irren?",
+          "prompt": "Kannst du dich irren? Und merkst du selbst, wenn du dich irrst?"
+        },
+        {
+          "label": "Erinnerst du dich an mich?",
+          "prompt": "Wenn ich morgen wiederkomme, erinnerst du dich dann an unser Gespräch?"
+        }
+      ],
+      "success": "Du hast dem Modell mindestens vier Fragen gestellt."
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Was macht ein Sprachmodell eigentlich, in deinen eigenen Worten?",
+      "Es hat gesagt, es kann sich irren. Hast du ihm das geglaubt?",
+      "Wenn es nichts weiss, warum klingt es dann so sicher?"
+    ],
+    "parentNote": "Erste Woche, und sie ist bewusst zu zweit. Das Ziel ist nicht Begeisterung, sondern ein Modellbild: ein Ding, das Wörter vorhersagt. Wenn sie am Ende sagt \"es rät halt\", ist die Woche gelungen.\n\nWiderstehe der Versuchung, es beeindruckend wirken zu lassen. Nächste Woche wird sie es beim Lügen erwischen, und das funktioniert besser, wenn sie es nicht für ein Orakel hält."
+  }
+}
