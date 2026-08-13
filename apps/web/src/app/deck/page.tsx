@@ -81,7 +81,7 @@ export default async function DeckPage() {
       )}
       <p className="muted">
         Die Zahl, auf die es ankommt, ist nicht die Höhe, sondern die Richtung: ungefragte Fänge pro
-        Sitzung sollten über sechs Wochen steigen.
+        Sitzung sollten über die Wochen steigen.
       </p>
 
       <h2>Fortschritt</h2>

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { VoyageArt } from "@/app/illustrations"
 import { Masthead } from "@/app/masthead"
 import { voyages } from "@/segel/content"
 import { logbuch, progress } from "@/segel/store"
@@ -87,7 +88,10 @@ export default async function LogbuchPage() {
         )}
       </div>
 
-      <h2>Die sechs Fahrten</h2>
+      {/* Counted, not spelled: the curriculum is data, and a heading that
+          says "six" while eleven are listed is the app telling her something
+          untrue on the home page. */}
+      <h2>Deine Fahrten</h2>
       <ul className="voyage-list">
         {all.map((voyage) => {
           const stations = voyage.stations.length
@@ -103,6 +107,7 @@ export default async function LogbuchPage() {
                 href={`/reise/${voyage.id}`}
               >
                 <span className="voyage-number">{voyage.number}</span>
+                <VoyageArt name={voyage.intro.illustration} className="art-thumb" />
                 <span>
                   <strong>{voyage.title}</strong>
                   <br />

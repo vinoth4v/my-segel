@@ -7,6 +7,7 @@
   "twoSeater": false,
   "intro": {
     "markdown": "Die Leute sagen \"die KI\", als wäre es ein Ding. Ist es nicht.\n\nEs gibt Dutzende. Gebaut von verschiedenen Firmen, in verschiedenen Ländern, mit verschiedenem Text gefüttert. Manche sind riesig, manche klein. Sie geben auf dieselbe Frage verschiedene Antworten — und manchmal widersprechen sie sich komplett.\n\nHeute stellst du dieselbe Frage an drei davon. Du weisst nicht, welches welches ist. Sie heissen nur A, B und C.\n\nDu liest, du sortierst, du schreibst auf, warum. **Erst dann** erfährst du, wer sie sind. Andersherum wäre es wertlos: wenn du den Namen kennst, bewertest du den Namen.",
+    "illustration": "der-zoo",
     "illustrationPrompt": "Drei gleich grosse Kartenfelder nebeneinander, mit A, B und C beschriftet, eines mit einer Messingnadel markiert"
   },
   "stations": [

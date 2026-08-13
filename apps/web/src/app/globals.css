@@ -465,6 +465,140 @@ button.catch {
   border-color: var(--color-danger);
 }
 
+/* ------------------------------------------------------------ pictures */
+
+/* Bolder than the chrome on purpose — see illustrations.tsx. The chart stays
+   thin-lined and restrained; the drawings carry the colour. */
+.art-frame {
+  margin: var(--space-6) 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.station-badge {
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 2.6rem;
+}
+
+.station-head {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  margin-bottom: var(--space-6);
+}
+
+.station-head .station-badge {
+  width: 4rem;
+  height: 3.4rem;
+}
+
+/* The thumbnail on the Logbuch's voyage list. Small enough to scan a row of
+   eleven, big enough to tell them apart at a glance. */
+.art-thumb {
+  flex: 0 0 auto;
+  width: 6.5rem;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  line-height: 0;
+}
+
+@media (max-width: 46rem) {
+  .art-thumb {
+    display: none;
+  }
+}
+
+/* Motion, deliberately small in amplitude and slow. Anything faster reads as
+   a toy; these should feel like water rather than animation. The global
+   prefers-reduced-motion block below flattens all of it. */
+@keyframes art-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes art-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(5px, -5px);
+  }
+}
+
+@keyframes art-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes art-sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes art-reach {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(7px);
+  }
+}
+
+.art-bob {
+  animation: art-bob 3.6s ease-in-out infinite;
+}
+
+.art-drift {
+  animation: art-drift 5s ease-in-out infinite;
+}
+
+.art-pulse {
+  animation: art-pulse 2.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.art-sway {
+  animation: art-sway 5.5s ease-in-out infinite;
+}
+
+.art-reach {
+  animation: art-reach 3.2s ease-in-out infinite;
+}
+
+.art-waves {
+  animation: art-drift 7s ease-in-out infinite;
+}
+
 /* ---------------------------------------------------------------- table */
 
 table {

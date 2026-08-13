@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { StationBadge } from "@/app/illustrations"
 import { Masthead } from "@/app/masthead"
 import { EchtStation } from "@/app/stations/echt"
 import { LaborStation } from "@/app/stations/labor"
@@ -39,8 +40,15 @@ export default async function StationPage({
         <Link href={`/reise/${voyage.id}`}>Fahrt {voyage.number}</Link> · Station {index + 1} von{" "}
         {total}
       </p>
-      <h1>{station.title}</h1>
-      <p className="muted">{station.intro}</p>
+      <div className="station-head">
+        <StationBadge type={station.type} />
+        <div>
+          <h1>{station.title}</h1>
+          <p className="muted" style={{ marginBottom: 0 }}>
+            {station.intro}
+          </p>
+        </div>
+      </div>
 
       {station.type === "talk" || station.type === "jagd" ? (
         <TalkStation voyageId={voyage.id} station={station} />

@@ -12,6 +12,7 @@ type Revealed = {
   name: string
   origin: string
   size: string
+  servedBy: string
 }
 
 /**
@@ -35,6 +36,8 @@ export function ZooStation({
   const [ranking, setRanking] = useState<string[]>([])
   const [why, setWhy] = useState("")
   const [revealed, setRevealed] = useState<Revealed[]>([])
+  /** False when the round happened to be served by one model under three letters. */
+  const [honest, setHonest] = useState(true)
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState("")
 
@@ -82,9 +85,14 @@ export function ZooStation({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ voyageId, stationId: station.id, round, ranking, why }),
     })
-    const data = (await response.json()) as { revealed?: Revealed[]; error?: string }
+    const data = (await response.json()) as {
+      revealed?: Revealed[]
+      honest?: boolean
+      error?: string
+    }
     if (data.revealed) {
       setRevealed(data.revealed)
+      setHonest(data.honest !== false)
     } else {
       setNotice(data.error ?? "Das hat nicht geklappt.")
     }
@@ -190,11 +198,20 @@ export function ZooStation({
             </>
           ) : (
             <div className="card">
-              <h3>Jetzt weisst du, wer wer war</h3>
-              <p>
-                Dieselbe Frage, drei verschiedene Antworten. Es gibt nicht <em>die</em> KI — es gibt
-                viele, und sie sind sich nicht einig.
-              </p>
+              <h3>{honest ? "Jetzt weisst du, wer wer war" : "Diesmal war es nur eines"}</h3>
+              {honest ? (
+                <p>
+                  Dieselbe Frage, drei verschiedene Antworten. Es gibt nicht <em>die</em> KI — es
+                  gibt viele, und sie sind sich nicht einig.
+                </p>
+              ) : (
+                // Better to admit a dud round than to name three models that
+                // were secretly one. The whole station is about checking.
+                <p>
+                  Diesmal hat dieselbe Maschine alle drei Antworten geschrieben — die anderen waren
+                  gerade belegt. Deshalb klingen sie so ähnlich. Probier noch eine Runde.
+                </p>
+              )}
               <button
                 type="button"
                 className="quiet"

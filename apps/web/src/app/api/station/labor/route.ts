@@ -1,6 +1,6 @@
 import { stationIn, voyageById } from "@/segel/content"
 import { badRequest, body, guard } from "@/segel/guard"
-import { callStation, PINS } from "@/segel/router"
+import { callStation, describeModel, route } from "@/segel/router"
 import { checkInput, checkOutput, systemFor } from "@/segel/safety"
 import { recordTurn } from "@/segel/store"
 
@@ -43,16 +43,19 @@ export async function POST(request: Request) {
   }
 
   const system = systemFor("labor", station.scaffold)
-  const model = PINS.labor
+  // One lane, named once and passed to both calls. The station is only a
+  // valid comparison if both halves meet the same model, and `route("labor")`
+  // never retries on another lane for the same reason.
+  const lane = route("labor").lane
 
   const [left, right] = await Promise.all([
     callStation("labor", [{ role: "user", content: weak.text }], {
       system,
-      overrideModel: model,
+      overrideLane: lane,
     }),
     callStation("labor", [{ role: "user", content: strong.text }], {
       system,
-      overrideModel: model,
+      overrideLane: lane,
     }),
   ])
 
@@ -81,12 +84,18 @@ export async function POST(request: Request) {
     })
   }
 
+  // Verified, not asserted. Both halves ask for the same lane, but a lane is
+  // a chain — if one call fell through to a different model, the comparison
+  // is measuring the model rather than her prompt and the station is lying.
+  // Cheap to check now that the gateway reports what actually answered.
+  const sameModel = left.call.servedBy === right.call.servedBy
+
   return Response.json({
     left: leftOut.text,
     right: rightOut.text,
-    // Shown to her on purpose: proof that the comparison was fair, and one
-    // more reminder that a model has a name.
-    model: left.call.servedBy || model,
-    sameModel: true,
+    // Shown to her on purpose: proof the comparison was fair, and one more
+    // reminder that a model has a name.
+    model: describeModel(left.call.servedBy).name,
+    sameModel,
   })
 }

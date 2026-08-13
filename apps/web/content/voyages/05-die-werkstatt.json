@@ -7,6 +7,7 @@
   "twoSeater": false,
   "intro": {
     "markdown": "Vier Wochen lang hast du geprüft, sortiert und umformuliert. Jetzt baust du.\n\nDu beschreibst eine kleine Sache — ein Spiel, einen Zähler, ein Werkzeug — und sie entsteht. Kein Code, keine Datei, kein Editor. Du sagst, was sie tun soll.\n\nDann sagst du, was anders werden soll. \"Mach die Knöpfe lila.\" \"Bau einen Timer ein.\" \"Zu schnell.\" Jede Fassung wird aufgehoben, zusammen mit dem Satz, der sie gebaut hat. Du kannst zurückblättern.\n\nDas ist der eigentliche Trick an dieser Woche: in vier Wochen schaust du dir deine alten Sätze an und siehst, dass du inzwischen anders fragst.\n\nWas hier entsteht, läuft in einem geschlossenen Kasten. Es kann nicht ins Internet und nichts auf dem Rechner anfassen. Wenn es kaputt ist, ist nur es selbst kaputt.",
+    "illustration": "die-werkstatt",
     "illustrationPrompt": "Eine Werkbank mit Zirkel, Lineal und einem halbfertigen Modellschiff, Bauplan darunter"
   },
   "stations": [

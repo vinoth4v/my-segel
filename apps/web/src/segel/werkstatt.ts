@@ -1,6 +1,6 @@
 import type { Message } from "@/kompass"
 import type { CallRecord } from "@/segel/router"
-import { callStation, PINS } from "@/segel/router"
+import { callStation, WERKSTATT_LANES } from "@/segel/router"
 import { systemFor } from "@/segel/safety"
 
 /**
@@ -139,16 +139,16 @@ export async function build(request: {
   let lastHtml = ""
 
   for (let attempt = 0; attempt <= MAX_REPAIRS; attempt += 1) {
-    // The escalation ladder: the pinned coder, then the other free coder,
-    // then whatever the agentic lane can serve. callStation already retries a
-    // hard failure; this handles the case where it answered but the answer
-    // does not work, which no gateway can detect for us.
-    const override =
-      attempt === 0 ? PINS.werkstatt[0] : attempt === 1 ? PINS.werkstatt[1] : undefined
+    // The escalation ladder: the agentic lane, then the strongest one. Only
+    // the second attempt onward escalates, so an ordinary build stays free.
+    // callStation already retries a *hard* failure; this handles the case
+    // where it answered and the answer does not work, which no gateway can
+    // detect for us.
+    const lane = WERKSTATT_LANES[Math.min(attempt, WERKSTATT_LANES.length - 1)]
 
     const reply = await callStation("werkstatt", messages, {
       system,
-      ...(override ? { overrideModel: override } : {}),
+      ...(lane ? { overrideLane: lane } : {}),
       maxTokens: 4000,
     })
 

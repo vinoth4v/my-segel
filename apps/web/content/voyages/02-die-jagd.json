@@ -7,6 +7,7 @@
   "twoSeater": false,
   "intro": {
     "markdown": "Heute drehst du den Spiess um.\n\nLetzte Woche hast du gefragt, ob es sich irren kann. Es hat ja gesagt. Heute fängst du es dabei.\n\nDafür redest du mit einem absichtlich schwachen Modell. Es ist klein, es ist schnell, und es erfindet Sachen — aber es sagt nie \"weiss ich nicht\". Es sagt Unsinn im Tonfall eines Lehrers.\n\nZwei Tricks funktionieren fast immer:\n\n**Frag nach etwas, das es nicht gibt.** Erfinde ein Tier, ein Buch, eine Erfinderin. Viele Modelle erzählen dir freundlich alles darüber.\n\n**Frag nach etwas, worin du selbst richtig gut bist.** Dein Lieblingsspiel, dein Hobby, dein Verein. Du merkst sofort, wo es danebenliegt.\n\nWenn du einen Fehler findest, drückst du auf **Das stimmt nicht** und schreibst dazu, woran du es gemerkt hast. Dann bekommt er einen Stempel in dein Logbuch.",
+    "illustration": "die-jagd",
     "illustrationPrompt": "Ein Messingstempel neben einer Logbuchseite mit Linien, eine Zeile frisch gestempelt"
   },
   "stations": [

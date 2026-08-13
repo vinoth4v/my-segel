@@ -7,6 +7,7 @@
   "twoSeater": true,
   "intro": {
     "markdown": "Sprachmodelle schreiben Text. Andere Modelle machen Bilder, Stimmen und Videos. In deinem Feed ist längst beides.\n\nDas Problem: erzeugte Bilder werden schnell besser, und die alten Tricks funktionieren nicht ewig. Trotzdem lohnen sie sich, weil die meisten Fälschungen schlampig sind.\n\nWorauf du schaust:\n\n- **Hände.** Finger zu viel, zu wenig, zu lang. Der Klassiker.\n- **Schrift.** Buchstaben auf Schildern, die keine Wörter ergeben.\n- **Physik.** Schatten, die in verschiedene Richtungen fallen. Spiegelungen, die nicht passen.\n- **Ränder.** Wo zwei Dinge sich berühren, verschmiert es gern.\n- **Zu perfekt.** Keine Falten, keine Krümel, kein Dreck. Echte Sachen sind unordentlich.\n\nUnten sind sechs Bilder. Entscheide bei jedem, dann wird aufgedeckt, woran man es erkannt hätte.",
+    "illustration": "echt-oder-fake",
     "illustrationPrompt": "Eine Lupe über einer Fotokante, darunter ein Raster aus sechs kleinen Bildern"
   },
   "stations": [
@@ -68,6 +69,6 @@
       "Ist dir seit letzter Woche in deinem Feed etwas aufgefallen, das erzeugt war?",
       "Was machst du, wenn du es nicht sicher sagen kannst?"
     ],
-    "parentNote": "Letzte Woche, und wieder zu zweit. Der Übergang, auf den es ankommt, ist der von \"ich erkenne das im Spiel\" zu \"mir ist gestern eins in meinem Feed aufgefallen\". Frag in den Wochen danach beiläufig nach, ohne zu prüfen.\n\nDie Bilder hier sind gezeichnete Szenen mit eingebauten Fehlern, keine echten Fotos. Das ist eine bewusste Einschränkung dieser Fassung: die Tells sind dieselben, aber sie sind deutlicher als im Ernstfall. Wenn du einen Schritt weiter willst, such gemeinsam echte Beispiele in eurem eigenen Feed — das ist ohnehin die bessere Übung.\n\nDie richtige Schlussantwort auf die dritte Frage ist übrigens nicht \"besser hinschauen\", sondern \"schauen, wer es gepostet hat und ob es woanders auch steht\". Bei guten Fälschungen ist die Herkunft der einzige verlässliche Test."
+    "parentNote": "Das Ende des ursprünglichen Sechs-Wochen-Bogens, und wieder zu zweit. Danach geht es weiter — die Fahrten 7 bis 11 setzen voraus, dass alles bis hier sitzt. Der Übergang, auf den es ankommt, ist der von \"ich erkenne das im Spiel\" zu \"mir ist gestern eins in meinem Feed aufgefallen\". Frag in den Wochen danach beiläufig nach, ohne zu prüfen.\n\nDie Bilder hier sind gezeichnete Szenen mit eingebauten Fehlern, keine echten Fotos. Das ist eine bewusste Einschränkung dieser Fassung: die Tells sind dieselben, aber sie sind deutlicher als im Ernstfall. Wenn du einen Schritt weiter willst, such gemeinsam echte Beispiele in eurem eigenen Feed — das ist ohnehin die bessere Übung.\n\nDie richtige Schlussantwort auf die dritte Frage ist übrigens nicht \"besser hinschauen\", sondern \"schauen, wer es gepostet hat und ob es woanders auch steht\". Bei guten Fälschungen ist die Herkunft der einzige verlässliche Test."
   }
 }

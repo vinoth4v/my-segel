@@ -1,0 +1,74 @@
+{
+  "id": "agenten",
+  "number": 10,
+  "title": "Was darf es selber tun?",
+  "subtitle": "Ein Modell, das nicht nur redet, sondern Knöpfe drückt",
+  "estMinutes": 30,
+  "twoSeater": false,
+  "intro": {
+    "markdown": "Bis jetzt hat es geredet. Du fragst, es antwortet, fertig. Es kann nichts anfassen.\n\nDas ändert sich gerade. Man kann Modellen Werkzeuge geben: im Internet suchen, E-Mails schicken, Sachen bestellen, Programme starten. So etwas heisst dann **Agent** — es redet nicht nur, es macht.\n\nDas ist praktisch und gefährlich, und zwar aus demselben Grund, den du schon kennst: **es irrt sich immer noch.** Ein Modell, das sich beim Reden irrt, sagt Unsinn. Ein Modell, das sich beim Handeln irrt, kauft das Falsche, schreibt an die falsche Person oder löscht etwas.\n\nDenk an die Fänge in deinem Logbuch. Jeder einzelne davon wäre als Aktion schlimmer gewesen als als Satz.\n\nDeshalb die wichtigste Regel für alles, was du je einen Agenten tun lässt: **Vorher fragen bei allem, was man nicht rückgängig machen kann.**",
+    "illustration": "agenten",
+    "illustrationPrompt": "Ein Roboterarm, der nach Werkzeugen auf einer Werkbank greift"
+  },
+  "stations": [
+    {
+      "id": "was-wuerdest-du-tun",
+      "type": "talk",
+      "title": "Was würdest du tun?",
+      "intro": "Frag es, was es täte, wenn es dürfte. Und wo es lieber vorher fragen würde.",
+      "scaffold": "Das Kind lernt gerade, was Agenten sind. Du hast selbst keine Werkzeuge und kein Internet — sag das klar. Wenn es dich fragt, was du mit Werkzeugen tun würdest, denk laut mit und sei ehrlich darüber, wo du dir selbst nicht trauen würdest. Betone bei jeder Aktion, ob man sie rückgängig machen kann.",
+      "seeds": [
+        {
+          "label": "Kannst du etwas tun?",
+          "prompt": "Kannst du eigentlich irgendwas machen ausser reden? Kannst du ins Internet oder etwas bestellen?"
+        },
+        {
+          "label": "Wenn du dürftest",
+          "prompt": "Stell dir vor, du dürftest für mich Sachen im Internet bestellen. Was könnte dabei schiefgehen?"
+        },
+        {
+          "label": "Wo würdest du fragen?",
+          "prompt": "Bei welchen Sachen würdest du lieber vorher nachfragen, statt sie einfach zu machen?"
+        },
+        {
+          "label": "Rückgängig?",
+          "prompt": "Was ist der Unterschied zwischen etwas, das man rückgängig machen kann, und etwas, das man nicht rückgängig machen kann? Gib mir Beispiele."
+        }
+      ],
+      "success": "Du hast mit ihm durchgesprochen, welche Aktionen man nicht zurückholen kann."
+    },
+    {
+      "id": "der-notausschalter",
+      "type": "werkstatt",
+      "title": "Bau einen Notausschalter",
+      "intro": "Bau etwas, das erst fragt, bevor es etwas Endgültiges tut.",
+      "scaffold": "Baue kleine Werkzeuge, bei denen eine gefährliche Aktion immer eine Bestätigung verlangt.",
+      "ideas": [
+        "Ein Löschknopf, der erst fragt „Wirklich?“ und einen Countdown von 5 zeigt",
+        "Eine Liste, bei der man gelöschte Sachen wieder zurückholen kann",
+        "Ein Bestellknopf, der den Preis nochmal gross anzeigt, bevor er absendet",
+        "Ein Schalter mit Klappe drüber, die man erst aufmachen muss",
+        "Ein Roboter, der eine Aufgabe macht — aber bei jedem Schritt auf Weiter wartet"
+      ],
+      "seeds": [
+        {
+          "label": "Der Wirklich-Knopf",
+          "prompt": "Bau einen grossen roten Löschknopf. Wenn man draufdrückt, fragt er erst „Wirklich löschen?“ mit Ja und Nein. Erst bei Ja verschwindet der Text."
+        },
+        {
+          "label": "Schritt für Schritt",
+          "prompt": "Bau einen kleinen Roboter, der drei Aufgaben nacheinander macht. Nach jedem Schritt muss ich auf Weiter drücken, sonst macht er nicht weiter."
+        }
+      ],
+      "success": "Du hast etwas gebaut, das vor einer endgültigen Aktion nachfragt."
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Welche Sachen kann man wirklich nicht rückgängig machen?",
+      "Würdest du einen Agenten alleine etwas bestellen lassen? Warum nicht?",
+      "Dein Notausschalter — hätte er auch einen Fehler aus deinem Logbuch aufgehalten?"
+    ],
+    "parentNote": "Diese Fahrt verbindet alles Vorherige zu etwas Praktischem. Sie weiss seit Fahrt 2, dass es sich irrt. Hier lernt sie, warum das mit Werkzeugen in der Hand eine andere Größenordnung ist.\n\nDie Werkstatt-Station ist bewusst gewählt: sie *baut* die Sicherheitsabfrage selbst, statt über sie zu reden. Ein Kind, das einmal einen Bestätigen-Dialog gebaut hat, versteht danach, warum echte Programme sie haben — und nervt sich weniger über sie.\n\nDie dritte Debriefing-Frage ist die beste der ganzen Fahrt: sie zwingt sie, ihr eigenes Logbuch nochmal zu lesen und sich vorzustellen, dieselbe falsche Antwort wäre eine Handlung gewesen. Lass ihr Zeit dafür.\n\nWenn sie fragt, ob Segel selbst ein Agent ist: nein, absichtlich nicht. Es redet und baut Seiten, es kauft nichts und verschickt nichts. Das ist eine ehrliche Antwort und ein gutes Beispiel für „man kann es auch absichtlich klein halten“."
+  }
+}

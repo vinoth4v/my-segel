@@ -1,6 +1,6 @@
 # Segel
 
-A guided AI-literacy app for one 10-year-old and her father. Six weeks, in
+A guided AI-literacy app for one 10-year-old and her father. Eleven weeks, in
 German, built around one idea: a language model is a confident pattern-matcher
 that is frequently and plausibly wrong, and she is the one who checks.
 
@@ -16,7 +16,8 @@ mistake she has caught a model making, each one stamped in brass, with her own
 words for how she spotted it. That is the home screen on purpose: the first
 thing she sees is the evidence of her own work, not a menu of homework.
 
-Underneath it are six voyages, each playable end to end today:
+Underneath it are eleven voyages, each playable end to end today. The first
+six build the mental model; the last five take it apart:
 
 1. **Was ist das Ding?** — she talks to a model and asks it what it is.
 2. **Die Jagd** — the core week. The app deliberately routes her to a *weak*
@@ -33,6 +34,16 @@ Underneath it are six voyages, each playable end to end today:
    version is kept with the sentence that produced it.
 6. **Echt oder Fake?** — six pictures, real and generated, with the tells
    revealed after she commits to a guess.
+7. **Woher kommt das alles?** — the text it learned from, and where its holes
+   are. Explains, retroactively, why week 2 worked.
+8. **Wer fehlt darin?** — who wrote that text, and what "normal" becomes when
+   it is learned from whoever wrote most.
+9. **Wem gehört das?** — copyright. The first voyage with no right answer;
+   she is asked for a view she can defend.
+10. **Was darf es selber tun?** — agents and tools. Every catch in her Logbuch
+    would have been worse as an action than as a sentence.
+11. **Was weiss es über dich?** — where her words actually go, and why the app
+    has been blocking her address since week 1.
 
 Her father gets a **Kapitäns-Deck** behind a second password prompt: every
 transcript, a catch-rate chart, which model answered what, every escalation to
@@ -41,9 +52,13 @@ talk to her about, time limits, and a kill switch.
 
 ## What works
 
-- All six voyages, playable, with the curriculum authored as data.
+- All eleven voyages, playable, with the curriculum authored as data.
+- Illustrations throughout — drawn in code from design tokens, so they
+  re-colour themselves in every theme and in dark mode.
 - The catch → why → brass stamp loop, filed to a real Logbuch.
-- Multi-model fan-out for the Zoo, tolerant of one model timing out.
+- Multi-model fan-out for the Zoo across genuinely distinct gateway lanes,
+  tolerant of one model timing out, naming each model from what actually
+  answered rather than from a table.
 - The Werkstatt build loop: generate, check the page mechanically, hand the
   model its own errors, escalate if it still fails. Version history included.
 - Safety: input and output filters, a homework refusal that fires before any
@@ -98,6 +113,10 @@ The curriculum is data, not code: `apps/web/content/voyages/*.json`, validated
 against a Zod schema. Rewording a week, reordering stations or adding seed
 questions needs no component change — and the schema is strict, so a typo
 fails the build rather than rendering an empty station in front of a child.
+
+Adding a week means a JSON file, one line in `src/segel/content.ts`, and a
+drawing named in `src/segel/art.ts`. A voyage naming a drawing that does not
+exist fails a test rather than rendering a bare heading.
 
 Otherwise: say what you want in the app's page on the
 [marketplace](https://werft-marketplace.vercel.app), or comment `@claude` on an

@@ -32,6 +32,15 @@ const scale = {
   seaGlassDeep: "#3d7d75",
   flagRed: "#b3261e",
   flagRedSoft: "#e2685c",
+  // Illustration hues. Still harbour-chart — flags, buoys, deep water — but
+  // saturated enough to carry a full-width drawing rather than a hairline
+  // diagram.
+  seaBlue: "#2f7fb5",
+  seaBlueSoft: "#63aede",
+  sunYellow: "#e2a33c",
+  sunYellowSoft: "#f2c46b",
+  coralPink: "#d4566f",
+  coralPinkSoft: "#ef8ba0",
 } as const
 
 /** Semantic colours. Each names a job, and carries a value per scheme. */
@@ -47,6 +56,13 @@ export const color = {
   // Earned things only — stamps in the Logbuch, finished voyages. If brass
   // starts decorating buttons it stops meaning anything.
   brass: { light: scale.brassDeep, dark: scale.brass },
+  // The illustration palette. Deliberately separate from accent/danger/
+  // success, which mean things: these three mean nothing and are free to be
+  // used for their colour. Keeping them out of the semantic set is what stops
+  // a drawing's blue from quietly becoming the "this is a link" blue.
+  sea: { light: scale.seaBlue, dark: scale.seaBlueSoft },
+  sun: { light: scale.sunYellow, dark: scale.sunYellowSoft },
+  coral: { light: scale.coralPink, dark: scale.coralPinkSoft },
 } as const
 
 export const space = {
