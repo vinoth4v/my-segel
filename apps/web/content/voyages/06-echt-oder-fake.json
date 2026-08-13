@@ -1,0 +1,73 @@
+{
+  "id": "echt-oder-fake",
+  "number": 6,
+  "title": "Echt oder Fake?",
+  "subtitle": "Was du sowieso jeden Tag siehst",
+  "estMinutes": 30,
+  "twoSeater": true,
+  "intro": {
+    "markdown": "Sprachmodelle schreiben Text. Andere Modelle machen Bilder, Stimmen und Videos. In deinem Feed ist längst beides.\n\nDas Problem: erzeugte Bilder werden schnell besser, und die alten Tricks funktionieren nicht ewig. Trotzdem lohnen sie sich, weil die meisten Fälschungen schlampig sind.\n\nWorauf du schaust:\n\n- **Hände.** Finger zu viel, zu wenig, zu lang. Der Klassiker.\n- **Schrift.** Buchstaben auf Schildern, die keine Wörter ergeben.\n- **Physik.** Schatten, die in verschiedene Richtungen fallen. Spiegelungen, die nicht passen.\n- **Ränder.** Wo zwei Dinge sich berühren, verschmiert es gern.\n- **Zu perfekt.** Keine Falten, keine Krümel, kein Dreck. Echte Sachen sind unordentlich.\n\nUnten sind sechs Bilder. Entscheide bei jedem, dann wird aufgedeckt, woran man es erkannt hätte.",
+    "illustrationPrompt": "Eine Lupe über einer Fotokante, darunter ein Raster aus sechs kleinen Bildern"
+  },
+  "stations": [
+    {
+      "id": "sechs-bilder",
+      "type": "echt",
+      "title": "Sechs Bilder",
+      "intro": "Echt oder erzeugt? Entscheide, dann siehst du, woran man es merkt.",
+      "success": "Du hast bei allen sechs Bildern entschieden und die Auflösung gelesen.",
+      "items": [
+        {
+          "id": "hand",
+          "scene": "hand",
+          "caption": "Eine Hand hält eine Tasse",
+          "fake": true,
+          "tell": "Zähl die Finger. Es sind sechs. Hände sind das, woran Bildmodelle am längsten gescheitert sind — sie sehen in den Trainingsbildern zwar Millionen Hände, aber fast nie zwei gleich."
+        },
+        {
+          "id": "schild",
+          "scene": "schild",
+          "caption": "Ein Ladenschild in einer Strasse",
+          "fake": true,
+          "tell": "Lies die Schrift. Die Buchstaben sehen aus wie Buchstaben, ergeben aber kein Wort. Das Modell hat gelernt, wie Schrift aussieht, nicht was sie bedeutet."
+        },
+        {
+          "id": "schatten",
+          "scene": "schatten",
+          "caption": "Zwei Bäume auf einer Wiese",
+          "fake": true,
+          "tell": "Die Schatten zeigen in verschiedene Richtungen. Es gibt aber nur eine Sonne. Solche Physikfehler sind der zuverlässigste Test, wenn die Hände mal stimmen."
+        },
+        {
+          "id": "kueche",
+          "scene": "kueche",
+          "caption": "Ein Frühstückstisch",
+          "fake": false,
+          "tell": "Echt. Die Krümel liegen unordentlich, der Schatten kommt von links, die Tasse steht schief. Unordnung ist ein gutes Zeichen für echt — erzeugte Bilder sind oft zu aufgeräumt."
+        },
+        {
+          "id": "portrait",
+          "scene": "portrait",
+          "caption": "Ein Porträt vor einer Wand",
+          "fake": true,
+          "tell": "Schau auf die Ohrringe: links und rechts verschieden. Und die Haut hat keine einzige Pore. Gesichter sind inzwischen sehr gut — die Details drumherum sind es nicht."
+        },
+        {
+          "id": "hafen",
+          "scene": "hafen",
+          "caption": "Boote im Hafen",
+          "fake": false,
+          "tell": "Echt. Die Spiegelungen im Wasser passen zu den Booten darüber, die Seile hängen durch, ein Boot ist angeschrammt. Solche Gebrauchsspuren erfindet ein Modell selten von allein."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Bei welchem hast du dich vertan, und warum?",
+      "Ist dir seit letzter Woche in deinem Feed etwas aufgefallen, das erzeugt war?",
+      "Was machst du, wenn du es nicht sicher sagen kannst?"
+    ],
+    "parentNote": "Letzte Woche, und wieder zu zweit. Der Übergang, auf den es ankommt, ist der von \"ich erkenne das im Spiel\" zu \"mir ist gestern eins in meinem Feed aufgefallen\". Frag in den Wochen danach beiläufig nach, ohne zu prüfen.\n\nDie Bilder hier sind gezeichnete Szenen mit eingebauten Fehlern, keine echten Fotos. Das ist eine bewusste Einschränkung dieser Fassung: die Tells sind dieselben, aber sie sind deutlicher als im Ernstfall. Wenn du einen Schritt weiter willst, such gemeinsam echte Beispiele in eurem eigenen Feed — das ist ohnehin die bessere Übung.\n\nDie richtige Schlussantwort auf die dritte Frage ist übrigens nicht \"besser hinschauen\", sondern \"schauen, wer es gepostet hat und ob es woanders auch steht\". Bei guten Fälschungen ist die Herkunft der einzige verlässliche Test."
+  }
+}

@@ -68,6 +68,18 @@ export type Message = { role: "user" | "assistant"; content: string }
 export type AskOptions = {
   /** Defaults to the agentic lane. */
   lane?: Lane
+  /**
+   * A pinned model name, passed to the gateway verbatim instead of a lane.
+   *
+   * Lanes are the normal way to ask, and the gateway picking the model is the
+   * point. Pinning exists for the rare feature whose *requirement* is a named
+   * model — Segel's Modell-Zoo compares specific models side by side, and its
+   * Prompt-Labor is only a valid comparison if both halves run on the same
+   * one. This still passes the name straight through; it does not reimplement
+   * lane selection, quota or cooldown, and a pinned call that fails should be
+   * retried on a lane rather than hand-rolled around.
+   */
+  model?: string
   /** Hard cap on the reply. Required by the API, so it has a sane default. */
   maxTokens?: number
   system?: string
@@ -105,7 +117,7 @@ export async function ask(messages: readonly Message[], options: AskOptions = {}
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: options.lane ?? "kompass-agentic",
+      model: options.model ?? options.lane ?? "kompass-agentic",
       max_tokens: options.maxTokens ?? 1024,
       ...(options.system ? { system: options.system } : {}),
       messages,

@@ -1,4 +1,10 @@
-/* Every value here comes from @werft/tokens. Add a token rather than a literal. */
+/* Every colour, space and font value here comes from @werft/tokens.
+   Add a token rather than a literal — a literal in a stylesheet is a token
+   nobody can find.
+
+   The direction is a harbour chart: an instrument, not a cartoon boat. She is
+   ten, not five. One thing animates in the whole app — the stamp landing on a
+   catch — and that restraint is what keeps it from reading as generated. */
 
 *,
 *::before,
@@ -9,22 +15,60 @@
 body {
   margin: 0;
   font-family: var(--font-family-sans);
-  font-size: var(--font-size-base);
-  line-height: 1.5;
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
   color: var(--color-fg);
   background: var(--color-bg);
 }
 
 main {
-  max-width: 40rem;
+  max-width: 52rem;
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--space-8) var(--space-6) var(--space-12);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
 }
 
 h1 {
-  margin: 0 0 var(--space-6);
+  margin: 0 0 var(--space-2);
   font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
+}
+
+h2 {
+  margin: var(--space-8) 0 var(--space-3);
+  font-size: var(--font-size-xl);
+}
+
+h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 3px;
+}
+
+/* Chart label: small caps-ish, wide tracking, the voice of an instrument. */
+.chart-label {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }
 
 label {
@@ -35,9 +79,11 @@ label {
   color: var(--color-muted);
 }
 
-input {
+input,
+textarea,
+select {
   width: 100%;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-3);
   font: inherit;
   color: var(--color-fg);
   background: var(--color-surface);
@@ -45,18 +91,27 @@ input {
   border-radius: var(--radius-md);
 }
 
+textarea {
+  min-height: 5rem;
+  resize: vertical;
+}
+
 input:focus-visible,
-button:focus-visible {
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
-input:hover {
+input:hover,
+textarea:hover {
   border-color: var(--color-muted);
 }
 
 button {
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-6);
   font: inherit;
   font-weight: var(--font-weight-medium);
   color: var(--color-bg);
@@ -64,26 +119,46 @@ button {
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition:
-    filter 120ms ease,
-    transform 120ms ease;
+  transition: filter 120ms ease;
 }
 
-/* brightness, not a second colour: hover stays derived from the one accent
-   token instead of quietly becoming a token nobody can find. */
-button:hover {
+button:hover:not(:disabled) {
   filter: brightness(1.08);
 }
 
-button:active {
-  transform: translateY(1px);
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
+button.quiet {
+  color: var(--color-fg);
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+button.quiet:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  filter: none;
+}
+
+/* The catch button. The only place danger-red is an invitation rather than a
+   warning — pressing it is the behaviour the whole app is built to reward. */
+button.catch {
+  color: var(--color-bg);
+  background: var(--color-danger);
+}
+
+/* The one place !important is correct: honouring a stated accessibility
+   preference has to beat every animation declared anywhere else, including
+   the stamp. A rule that loses to specificity is not an override. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: must outrank every motion rule */
     transition-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: must outrank every motion rule */
     animation-duration: 0.01ms !important;
   }
 }
@@ -94,4 +169,322 @@ button:active {
   background: var(--color-surface);
   border: 1px solid var(--color-danger);
   border-radius: var(--radius-md);
+}
+
+/* ------------------------------------------------------------ structure */
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.masthead nav {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.wordmark {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.card {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.muted {
+  color: var(--color-muted);
+  font-size: var(--font-size-base);
+}
+
+.split {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr 1fr;
+}
+
+.trio {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 46rem) {
+  .split,
+  .trio {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------- the logbuch */
+
+/* The signature object: a ruled ledger page. Her progress should look like
+   something she made, not like a dashboard. */
+.ledger {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: var(--space-2) solid var(--color-brass);
+  border-radius: var(--radius-sm);
+}
+
+.ledger-row {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ledger-row:last-child {
+  border-bottom: none;
+}
+
+.ledger-date {
+  flex: 0 0 6rem;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  padding-top: var(--space-1);
+}
+
+/* The brass stamp. Earned things only. */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 3.4rem;
+  height: 3.4rem;
+  padding: 0 var(--space-2);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+  border: 2px solid var(--color-brass);
+  border-radius: var(--radius-full);
+  transform: rotate(-8deg);
+  opacity: 0.9;
+}
+
+/* The one orchestrated moment in the app: a stamp landing. */
+@keyframes stamp-land {
+  0% {
+    transform: rotate(-8deg) scale(2.4);
+    opacity: 0;
+  }
+  60% {
+    transform: rotate(-8deg) scale(0.94);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-8deg) scale(1);
+    opacity: 0.9;
+  }
+}
+
+.stamp.landing {
+  animation: stamp-land 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* ---------------------------------------------------------- the voyages */
+
+.voyage-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.voyage {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+}
+
+.voyage:hover {
+  border-color: var(--color-accent);
+}
+
+.voyage[aria-disabled="true"] {
+  opacity: 0.55;
+}
+
+.voyage-number {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-muted);
+  flex: 0 0 2.5rem;
+}
+
+.voyage-done .voyage-number {
+  color: var(--color-brass);
+}
+
+/* --------------------------------------------------------- conversation */
+
+.turn {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  white-space: pre-wrap;
+}
+
+.turn.kind {
+  border-color: var(--color-accent);
+  background: transparent;
+}
+
+.turn.caught {
+  border-color: var(--color-brass);
+}
+
+.turn-who {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+  font-size: var(--font-size-base);
+  color: var(--color-fg);
+  background: transparent;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-style: solid;
+  border-color: var(--color-accent);
+  filter: none;
+}
+
+.chip[aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------- meters */
+
+.meter {
+  height: var(--space-2);
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  background: var(--color-success);
+}
+
+.meter.weak > span {
+  background: var(--color-danger);
+}
+
+.meter.middling > span {
+  background: var(--color-brass);
+}
+
+/* ------------------------------------------------------------- werkstatt */
+
+.frame {
+  width: 100%;
+  height: 26rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.scene {
+  width: 100%;
+  height: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.verdict-right {
+  border-color: var(--color-success);
+}
+
+.verdict-wrong {
+  border-color: var(--color-danger);
+}
+
+/* ---------------------------------------------------------------- table */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-base);
+}
+
+th,
+td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+th {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }

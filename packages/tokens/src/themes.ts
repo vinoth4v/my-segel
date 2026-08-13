@@ -22,6 +22,11 @@ import { color } from "./tokens.ts"
  *   kimi-cocoa    — chocolate luxury, caramel gold (Cocoa Hills)
  *   kimi-editorial — sharp monochrome, high contrast (British Museum / Editorial Reader)
  *   kimi-terminal — dark data-dense UI, amber accents (GMT://TERMINAL)
+ *
+ * `brass` is the token for *earned* things — a stamp in the Logbuch, a
+ * finished voyage. Every theme has to answer "what does earned look like
+ * here", because a var() that resolves in one theme and not another is the
+ * exact bug a swap-the-values system must not have.
  */
 
 /** A per-scheme value for each of the semantic colour tokens. Widened from
@@ -29,7 +34,7 @@ import { color } from "./tokens.ts"
  * theme to the default's exact hex strings. */
 type Scheme = { light: string; dark: string }
 type ColorSet = Record<keyof typeof color, Scheme>
-type FontSet = { sans: string; mono: string }
+type FontSet = { sans: string; display: string; mono: string }
 type RadiusSet = { sm: string; md: string; lg: string; full: string }
 
 export type Theme = {
@@ -41,10 +46,13 @@ export type Theme = {
   radius?: RadiusSet
 }
 
+const MONO = "ui-monospace, SFMono-Regular, Menlo, monospace"
+const SERIF = "Georgia, 'Iowan Old Style', 'Times New Roman', serif"
+
 export const THEMES = {
   werft: {
-    label: "Werft",
-    inspiration: "The default: quiet zinc and workshop blue.",
+    label: "Segel",
+    inspiration: "Harbour chart: navy, aged paper, signal orange, brass.",
     color,
   },
   madras: {
@@ -59,11 +67,9 @@ export const THEMES = {
       accent: { light: "#b0421f", dark: "#d96a45" },
       danger: { light: "#a83232", dark: "#d97b6c" },
       success: { light: "#5a7d5a", dark: "#86b386" },
+      brass: { light: "#9a7b2a", dark: "#d6b34d" },
     },
-    fontFamily: {
-      sans: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
-      mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
-    },
+    fontFamily: { sans: SERIF, display: SERIF, mono: MONO },
   },
   deck: {
     label: "Deck",
@@ -77,6 +83,7 @@ export const THEMES = {
       accent: { light: "#16a34a", dark: "#4ade80" },
       danger: { light: "#dc2626", dark: "#f87171" },
       success: { light: "#0d9488", dark: "#2dd4bf" },
+      brass: { light: "#a8801f", dark: "#e3b93f" },
     },
     radius: { sm: "0.125rem", md: "0.375rem", lg: "0.5rem", full: "9999px" },
   },
@@ -92,6 +99,7 @@ export const THEMES = {
       accent: { light: "#6d4df6", dark: "#a18aff" },
       danger: { light: "#e5484d", dark: "#ff6369" },
       success: { light: "#2fb37e", dark: "#4cc596" },
+      brass: { light: "#9c7c33", dark: "#d8b45c" },
     },
   },
   tinte: {
@@ -106,6 +114,7 @@ export const THEMES = {
       accent: { light: "#1a1a1a", dark: "#f2f0ea" },
       danger: { light: "#b3261e", dark: "#ff7a70" },
       success: { light: "#1f7a45", dark: "#63c489" },
+      brass: { light: "#8a7433", dark: "#c9ab5f" },
     },
     radius: { sm: "0.125rem", md: "0.25rem", lg: "0.375rem", full: "9999px" },
   },
@@ -121,11 +130,9 @@ export const THEMES = {
       accent: { light: "#b85c3e", dark: "#d96a45" },
       danger: { light: "#a83232", dark: "#d97b6c" },
       success: { light: "#5a7d5a", dark: "#86b386" },
+      brass: { light: "#9a7b2a", dark: "#d6b34d" },
     },
-    fontFamily: {
-      sans: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
-      mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
-    },
+    fontFamily: { sans: SERIF, display: SERIF, mono: MONO },
   },
   "kimi-cocoa": {
     label: "Kimi Cocoa",
@@ -139,11 +146,9 @@ export const THEMES = {
       accent: { light: "#c9a66b", dark: "#d4b87a" },
       danger: { light: "#b3261e", dark: "#d97b6c" },
       success: { light: "#4a7c59", dark: "#86b386" },
+      brass: { light: "#a3822f", dark: "#dcbb5a" },
     },
-    fontFamily: {
-      sans: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
-      mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
-    },
+    fontFamily: { sans: SERIF, display: SERIF, mono: MONO },
   },
   "kimi-editorial": {
     label: "Kimi Editorial",
@@ -157,10 +162,12 @@ export const THEMES = {
       accent: { light: "#1a1a1a", dark: "#f2f0ea" },
       danger: { light: "#b3261e", dark: "#ff7a70" },
       success: { light: "#1f7a45", dark: "#63c489" },
+      brass: { light: "#8a7433", dark: "#c9ab5f" },
     },
     fontFamily: {
       sans: "'Helvetica Neue', Arial, sans-serif",
-      mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
+      display: "'Helvetica Neue Condensed', 'Arial Narrow', 'Helvetica Neue', sans-serif",
+      mono: MONO,
     },
     radius: { sm: "0.125rem", md: "0.25rem", lg: "0.375rem", full: "9999px" },
   },
@@ -176,11 +183,9 @@ export const THEMES = {
       accent: { light: "#d97706", dark: "#f59e0b" },
       danger: { light: "#dc2626", dark: "#f87171" },
       success: { light: "#0d9488", dark: "#2dd4bf" },
+      brass: { light: "#a8801f", dark: "#e3b93f" },
     },
-    fontFamily: {
-      sans: "ui-monospace, SFMono-Regular, Menlo, monospace",
-      mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
-    },
+    fontFamily: { sans: MONO, display: MONO, mono: MONO },
     radius: { sm: "0.125rem", md: "0.25rem", lg: "0.375rem", full: "9999px" },
   },
 } as const satisfies Record<string, Theme>
