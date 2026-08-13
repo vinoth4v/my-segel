@@ -103,3 +103,70 @@ being removed.
   unbuilt and all in ARCHITECTURE.md under Known gaps.
 - The `echt` scenes are the weakest part of the app. If image generation
   becomes reachable, that station deserves rebuilding.
+
+---
+
+## Fixed the Modell-Zoo, added five voyages, illustrated everything
+
+**Asked:** more pictures — "its too text for engaging a kid" — and "fully add
+more subjects". Clarified before building: more AI-literacy voyages rather
+than new school subjects, bolder illustrations rather than the instrument
+aesthetic, and fold in the Zoo fix.
+
+**Found first, and it changed the shape of the work.** Asked whether the
+Kompass keys were all set, the answer was yes — and probing the gateway to
+confirm turned up a shipped bug. `GET /v1/models` returns only the six lane
+aliases. Pinned names like `kompass:google/gemini-3.6-flash` are *not*
+rejected: the gateway answers 200 and silently serves its default lane. So the
+Modell-Zoo asked three "different" models, received three answers from one
+model, and revealed them to a ten-year-old as Gemini, DeepSeek and GLM. A
+station whose subject is "models disagree, so check" was fabricating its own
+evidence.
+
+Nothing caught it because nothing failed — no error, no timeout, no empty
+reply — so the fallback ladder never fired, and the tests passed because they
+asserted what was *sent*, never what was honoured.
+
+**Changed:** the router now uses lanes throughout; `zooTrio` draws from
+`fast`/`agentic`/`hard`/`longctx`; the reveal names each model from the
+gateway's own `x-kompass-served-by`, read back from the transcript rows the
+round wrote. Five new voyages (7–11: Trainingsdaten, Verzerrung,
+Urheberrecht, Agenten, Privatsphäre). Eleven voyage illustrations plus station
+badges, drawn from three new design tokens (`sea`, `sun`, `coral`) added
+across all nine themes.
+
+**Decided, and why:**
+
+- *Lanes, not pins, and never again a table of model names.* What she is told
+  a model was now comes from what actually answered. A table can drift out of
+  truth silently; a response header cannot.
+- *`kompass-simple` is excluded from the Zoo roster* because it and
+  `kompass-fast` both resolve to gpt-oss-120b — the same bug one level
+  quieter.
+- *A collapsed round admits it.* If fewer than two distinct models answered,
+  the reveal says the same machine wrote all three rather than naming three.
+  Better a dud round than a lesson in the opposite of checking.
+- *`labor` verifies rather than asserts.* It compared `servedBy` on both
+  halves; previously it hardcoded `sameModel: true`, which was an unchecked
+  claim of exactly the kind this session was spent removing.
+- *Illustrations bolder than the chrome.* The design direction rules out
+  cartoon mascots and Fisher-Price primaries, not colour — so the drawings
+  push scale and hue while keeping buoys, flags and deep water.
+
+**Rejected:**
+
+- *New school subjects* (maths, biology). Asked, and the answer was more AI
+  literacy. It would also have collided with the app's hard rule that it
+  refuses homework.
+- *Suppressing the collapsed-round case.* Showing three names anyway would
+  have hidden the remaining fragility from the only person who can act on it.
+
+**Open:**
+
+- Still no station has received a real model reply. The token and lanes were
+  verified with curl; the app has not been run against them.
+- The Zoo now depends on lanes resolving to distinct models. True today, not
+  guaranteed. Re-probe occasionally.
+- Voyage 6's parent note and several UI strings said "six" and had to be
+  chased down. Worth remembering that the curriculum being data does not make
+  the copy around it data too.

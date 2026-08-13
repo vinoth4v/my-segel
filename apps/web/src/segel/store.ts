@@ -242,6 +242,28 @@ export async function transcriptFor(voyageId?: string, limit = 200) {
   return voyageId ? query.where(eq(transcript.voyageId, voyageId)) : query
 }
 
+/**
+ * The most recent Zoo model rows for a station, newest first.
+ *
+ * Feeds the reveal: each row carries its letter and the model that actually
+ * served it. Six rather than three so a round whose rows interleave with a
+ * retry still has its full set available to pair from.
+ */
+export async function zooRows(voyageId: string, stationId: string) {
+  return db()
+    .select({ content: transcript.content, servedBy: transcript.servedBy, at: transcript.at })
+    .from(transcript)
+    .where(
+      and(
+        eq(transcript.voyageId, voyageId),
+        eq(transcript.stationId, stationId),
+        eq(transcript.role, "modell"),
+      ),
+    )
+    .orderBy(desc(transcript.at))
+    .limit(6)
+}
+
 export async function escalations(limit = 50) {
   return db()
     .select()

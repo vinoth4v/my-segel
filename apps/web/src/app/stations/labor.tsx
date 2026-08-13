@@ -23,7 +23,12 @@ export function LaborStation({
 }) {
   const [weak, setWeak] = useState(station.seeds[0]?.prompt ?? "")
   const [picked, setPicked] = useState<Record<string, string>>({})
-  const [result, setResult] = useState<{ left: string; right: string; model: string }>()
+  const [result, setResult] = useState<{
+    left: string
+    right: string
+    model: string
+    sameModel: boolean
+  }>()
   const [changed, setChanged] = useState("")
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState("")
@@ -45,6 +50,7 @@ export function LaborStation({
         left?: string
         right?: string
         model?: string
+        sameModel?: boolean
         message?: string
         refused?: string
         stopped?: string
@@ -53,7 +59,12 @@ export function LaborStation({
         setNotice(data.message ?? "Das hat nicht geklappt.")
         return
       }
-      setResult({ left: data.left, right: data.right ?? "", model: data.model ?? "" })
+      setResult({
+        left: data.left,
+        right: data.right ?? "",
+        model: data.model ?? "",
+        sameModel: data.sameModel !== false,
+      })
     } catch {
       setNotice("Die Verbindung hat nicht geklappt.")
     } finally {
@@ -145,10 +156,19 @@ export function LaborStation({
               <p style={{ whiteSpace: "pre-wrap", marginBottom: 0 }}>{result.right}</p>
             </div>
           </div>
-          <p className="muted">
-            Beide Antworten kommen vom selben Modell{result.model ? ` (${result.model})` : ""}. Der
-            Unterschied kommt allein von deinen Wörtern.
-          </p>
+          {result.sameModel ? (
+            <p className="muted">
+              Beide Antworten kommen vom selben Modell{result.model ? ` (${result.model})` : ""}.
+              Der Unterschied kommt allein von deinen Wörtern.
+            </p>
+          ) : (
+            // Said out loud rather than hidden: without it she would draw a
+            // conclusion about her prompt from a comparison that was not fair.
+            <p role="alert">
+              Achtung: diesmal haben zwei verschiedene Modelle geantwortet. Dann kannst du nicht
+              wissen, ob der Unterschied von deinem Prompt kommt. Lass es noch einmal laufen.
+            </p>
+          )}
 
           <label htmlFor="changed">Was hast du geändert?</label>
           <input

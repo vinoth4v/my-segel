@@ -7,6 +7,7 @@
   "twoSeater": true,
   "intro": {
     "markdown": "Du hast bestimmt schon gehört, dass Computer jetzt reden können. Das stimmt fast.\n\nWas da redet, heisst Sprachmodell. Es hat unfassbar viel Text gelesen — Bücher, Webseiten, Kommentare — und dabei genau eine Sache gelernt: welches Wort als nächstes kommt. Mehr nicht. Es weiss nichts. Es rät sehr, sehr gut.\n\nDrei Regeln nimmst du ab heute mit:\n\n1. Es rät. Immer. Auch wenn es sicher klingt.\n2. Sicher klingen und recht haben sind zwei verschiedene Dinge.\n3. Du bist die, die nachprüft.\n\nHeute redest du zum ersten Mal mit einem. Frag es Sachen, bei denen du selbst weisst, ob die Antwort stimmt.",
+    "illustration": "was-ist-das-ding",
     "illustrationPrompt": "Ein Seekartenausschnitt mit einer Kompassrose, daneben eine Hand, die mit dem Zirkel nachmisst"
   },
   "stations": [

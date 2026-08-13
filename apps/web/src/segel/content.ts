@@ -5,6 +5,11 @@ import voyage3 from "../../content/voyages/03-der-zoo.json" with { type: "json" 
 import voyage4 from "../../content/voyages/04-das-prompt-labor.json" with { type: "json" }
 import voyage5 from "../../content/voyages/05-die-werkstatt.json" with { type: "json" }
 import voyage6 from "../../content/voyages/06-echt-oder-fake.json" with { type: "json" }
+import voyage7 from "../../content/voyages/07-woher-kommt-das-alles.json" with { type: "json" }
+import voyage8 from "../../content/voyages/08-wer-fehlt-darin.json" with { type: "json" }
+import voyage9 from "../../content/voyages/09-wem-gehoert-das.json" with { type: "json" }
+import voyage10 from "../../content/voyages/10-was-darf-es-selber-tun.json" with { type: "json" }
+import voyage11 from "../../content/voyages/11-was-weiss-es-ueber-dich.json" with { type: "json" }
 
 /**
  * The curriculum, loaded and validated.
@@ -27,6 +32,11 @@ const RAW: { source: string; data: unknown }[] = [
   { source: "04-das-prompt-labor.json", data: voyage4 },
   { source: "05-die-werkstatt.json", data: voyage5 },
   { source: "06-echt-oder-fake.json", data: voyage6 },
+  { source: "07-woher-kommt-das-alles.json", data: voyage7 },
+  { source: "08-wer-fehlt-darin.json", data: voyage8 },
+  { source: "09-wem-gehoert-das.json", data: voyage9 },
+  { source: "10-was-darf-es-selber-tun.json", data: voyage10 },
+  { source: "11-was-weiss-es-ueber-dich.json", data: voyage11 },
 ]
 
 let cached: Voyage[] | undefined

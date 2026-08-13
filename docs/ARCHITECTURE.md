@@ -6,13 +6,13 @@ that is SESSIONS.md's job.
 
 ## Purpose
 
-A guided AI-literacy app for one 10-year-old and her father. Six weeks of
+A guided AI-literacy app for one 10-year-old and her father. Eleven weeks of
 curriculum, in German, whose subject is that a language model is a confident
 pattern-matcher that is frequently and plausibly wrong.
 
 The pedagogy constrains the engineering in ways that look like bugs if you do
-not know them. Two examples, both load-bearing: `jagd` is pinned to a *weak*
-model because the failure is the lesson, and `labor` must run both halves of
+not know them. Two examples, both load-bearing: `jagd` runs on the *weakest*
+lane because the failure is the lesson, and `labor` must run both halves of
 its comparison on the *same* model or the station measures the wrong thing.
 Neither would survive a well-meaning optimisation pass, which is why both are
 covered by unit tests that say so.
@@ -78,7 +78,7 @@ and nothing here is exempt beyond the template's own `/login` and `/api/auth`.
 | `POST /api/station/chat` | `talk` and `jagd`. Filters, caps, transcript. |
 | `POST /api/station/zoo` | Three models concurrently, `allSettled`. Never reveals which is which. |
 | `POST /api/station/zoo/reveal` | Requires her ranking in the same request that returns the names. |
-| `POST /api/station/labor` | Both prompts, one pinned model, in one request. |
+| `POST /api/station/labor` | Both prompts, one lane, in one request; verifies both halves were served by the same model. |
 | `POST /api/station/werkstatt` | The build loop; creates or versions an artifact. |
 | `POST /api/logbuch` | Files a catch. Requires her `why`. No cap check. |
 | `POST /api/progress` | Start/complete, for stations that need no model. |
@@ -115,10 +115,24 @@ Kapitäns-Deck, so the free-to-paid ratio is visible rather than drifting.
   underlying concern — that the one open child-facing conversation should not
   be served by something that ignores the safety prompt — is met by giving it
   a *lane* rather than a pin, so the gateway always has a working chain.
-- **Pins are allowed, but only where the model *is* the requirement.** `jagd`
-  (weak on purpose), `labor` (identical both sides), `zoo` (variety is the
-  lesson). Everywhere else a lane alias, and every pin falls back to its lane
-  rather than breaking a station in front of a child.
+- **Lanes only. The gateway does not support pinned model names.** This was
+  learned the hard way: an earlier version asked for names like
+  `kompass:google/gemini-3.6-flash`. `GET /v1/models` returns *only* the six
+  lane aliases, and an unknown name is not rejected — the gateway answers 200
+  and quietly serves its default lane. The Modell-Zoo therefore got three
+  answers from one model and revealed them under three invented names. Nothing
+  caught it because nothing failed. The pedagogy is now expressed in lanes,
+  which really do resolve to different models: `kompass-simple` for `jagd`,
+  one fixed lane for both halves of `labor`, and a Zoo trio drawn from
+  `fast`/`agentic`/`hard`/`longctx`.
+- **`kompass-simple` is excluded from the Zoo roster.** It and `kompass-fast`
+  both resolve to gpt-oss-120b today, so drawing both would put one model on
+  the table twice under two letters — a quieter version of the same bug.
+- **Model names shown to her come from `x-kompass-served-by`, never from a
+  table.** A table drifts out of truth; the header is what actually answered.
+  An unrecognised model is named from its own string rather than guessed, and
+  a round that turns out to have been served by fewer than two distinct models
+  says so instead of naming three.
 - **One account, two locks.** `AGENTS.md` forbids adding a second user, and a
   real child/parent split needs a real user store. But the session in use is
   usually *hers*, and the deck holds transcripts, caps and the kill switch —
@@ -131,7 +145,15 @@ Kapitäns-Deck, so the free-to-paid ratio is visible rather than drifting.
   invisibly. Refusing is visibly broken, which is the better failure.
 - **The Zoo reveal is enforced at the wire.** The browser is never told which
   model is behind A, B or C until it posts a ranking. A UI-only blind test is
-  undone by a curious ten-year-old with a devtools window.
+  undone by a curious ten-year-old with a devtools window. The mapping lives
+  only in the transcript rows the round wrote, each tagged with its letter and
+  carrying the model that served it.
+- **Illustrations are SVG built from design tokens, not images.** No image
+  model is reachable through a text gateway and the app may not fetch
+  anything, but the constraint pays: a token-built drawing re-colours itself
+  in every theme and in dark mode, which a PNG never would. They are
+  deliberately bolder than the chrome — the design direction rules out cartoon
+  mascots and Fisher-Price primaries, not colour.
 - **Grading is arithmetic, not a model.** The quiz has its answers in the
   content JSON and the prompt-strength meter counts levers. Both are instant,
   free and never wrong — and in an app about models being confidently wrong,
@@ -169,7 +191,16 @@ Kapitäns-Deck, so the free-to-paid ratio is visible rather than drifting.
 - **Session caps are charged per model call**, not by a heartbeat, so time
   spent reading without asking anything is not counted. Given the anti-metric
   is time in app, undercounting is the safer direction.
-- **Nothing has been run against a real gateway token or a real database.**
-  Every gate is green and the whole app has been walked through in a browser,
-  but with `KOMPASS_TOKEN` empty and no Neon project, so no station has
-  actually received a model's reply yet.
+- **No station has yet received a real model reply.** The gateway token has
+  been verified to work and its lanes probed directly with curl, but the app
+  itself has only ever run locally with `KOMPASS_TOKEN` empty. Production has
+  the credentials; the first real session is the first integration test.
+- **The Zoo depends on lanes resolving to different models**, which is true
+  today and is not guaranteed. If the gateway ever points several lanes at one
+  model, the reveal will say so rather than lie — but the station loses its
+  point until the roster recovers. Worth re-probing `/v1/models` and the
+  served-by headers occasionally.
+- **The `echt` scenes and the voyage illustrations are hand-drawn**, so adding
+  a voyage means drawing one. That is a real cost per week and the reason
+  `segel/art.ts` exists: a voyage naming a drawing that does not exist fails a
+  test rather than rendering a bare heading.

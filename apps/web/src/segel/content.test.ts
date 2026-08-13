@@ -1,12 +1,27 @@
 import { describe, expect, it } from "vitest"
+import { ART_NAMES } from "./art.ts"
 import { allStations, stationPosition, voyageById, voyages } from "./content.ts"
 import { parseVoyage } from "./content-schema.ts"
 
 describe("the curriculum", () => {
-  it("loads all six voyages, in order", () => {
+  it("loads every voyage, numbered contiguously from one", () => {
     const all = voyages()
-    expect(all).toHaveLength(6)
-    expect(all.map((voyage) => voyage.number)).toEqual([1, 2, 3, 4, 5, 6])
+    expect(all.length).toBeGreaterThanOrEqual(6)
+    // Contiguous rather than a hardcoded list: adding a week should not need
+    // this test edited, but a gap or a duplicate number must still fail.
+    expect(all.map((voyage) => voyage.number)).toEqual(
+      Array.from({ length: all.length }, (_, index) => index + 1),
+    )
+  })
+
+  it("gives every voyage a drawing that actually exists", () => {
+    // A voyage naming a drawing the component file does not have would render
+    // a bare heading — the failure would be invisible in tests and obvious
+    // only to the child looking at an empty page.
+    for (const voyage of voyages()) {
+      expect(voyage.intro.illustration, voyage.id).toBeTruthy()
+      expect(ART_NAMES, voyage.id).toContain(voyage.intro.illustration)
+    }
   })
 
   it("teaches skepticism before capability", () => {

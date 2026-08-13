@@ -7,7 +7,7 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Segel",
-  description: "Sechs Fahrten, um zu verstehen, was diese Modelle wirklich tun.",
+  description: "Fahrt für Fahrt verstehen, was diese Modelle wirklich tun.",
 }
 
 export const viewport: Viewport = {

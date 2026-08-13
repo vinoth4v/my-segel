@@ -7,6 +7,7 @@
   "twoSeater": false,
   "intro": {
     "markdown": "Bisher hast du geprüft, was rauskommt. Heute änderst du, was reingeht.\n\nDas Modell rät, welche Wörter zu deinen Wörtern passen. Also entscheiden deine Wörter mit, was du bekommst. \"Schreib was über Hunde\" und \"Schreib vier Sätze für meine Oma, warum ein Dackel ein guter Ersthund ist, ohne Fachwörter\" sind nicht dieselbe Frage.\n\nVier Hebel machen fast den ganzen Unterschied:\n\n- **Wer** soll antworten — eine Tierärztin, eine Zehnjährige, ein Kapitän\n- **Was genau** willst du — nicht \"was über\", sondern die eigentliche Sache\n- **Was nicht** — keine Fachwörter, keine Aufzählung, nicht länger als\n- **Wie lang** — vier Sätze, ein Absatz, eine Liste mit drei Punkten\n\nLinks steht dein erster Versuch. Rechts baust du daraus die stärkere Fassung. Beide laufen — **auf demselben Modell**, sonst würdest du das Modell vergleichen statt deinen Prompt.",
+    "illustration": "das-prompt-labor",
     "illustrationPrompt": "Zwei Kartenblätter nebeneinander auf einem Tisch, das rechte mit zusätzlichen Bleistiftnotizen am Rand"
   },
   "stations": [

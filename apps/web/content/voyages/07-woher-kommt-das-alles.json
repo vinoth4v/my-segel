@@ -1,0 +1,103 @@
+{
+  "id": "trainingsdaten",
+  "number": 7,
+  "title": "Woher kommt das alles?",
+  "subtitle": "Es hat nichts erfunden — es hat alles irgendwo gelesen",
+  "estMinutes": 25,
+  "twoSeater": false,
+  "intro": {
+    "markdown": "In Fahrt 1 hast du gelernt: es rät das nächste Wort. Heute die andere Hälfte — **woher** es weiss, was passt.\n\nJemand hat unfassbar viel Text eingesammelt. Wikipedia. Bücher. Foren. Kommentare unter Videos. Blogs von 2009. Rezepte. Streit auf Reddit. Alles zusammen in einen Topf, und daraus hat das Modell gelernt, wie Sprache klingt.\n\nDas erklärt drei Sachen auf einmal:\n\n- Warum es über Dinosaurier viel weiss und über deine Strasse nichts.\n- Warum es manchmal antwortet wie ein Forumsbeitrag von jemandem, der keine Ahnung hat.\n- Warum es beim Erfinden trotzdem so sicher klingt: es hat gelernt, wie **sicher klingen** aussieht.\n\nHeute findest du raus, wo seine Löcher sind.",
+    "illustration": "trainingsdaten",
+    "illustrationPrompt": "Ein Berg aus Seiten und Büchern, der in eine Maschine fliesst"
+  },
+  "stations": [
+    {
+      "id": "wo-sind-die-loecher",
+      "type": "jagd",
+      "title": "Wo sind die Löcher?",
+      "intro": "Frag nach Sachen, über die kaum jemand ins Internet schreibt. Da wird es dünn.",
+      "scaffold": "Antworte so gut du kannst. Wenn du etwas nicht sicher weisst, sag es.",
+      "targetCatches": 2,
+      "seeds": [
+        {
+          "label": "Etwas sehr Kleines",
+          "prompt": "Was ist das Besondere an der Bäckerei in meinem Dorf? Beschreib sie mir."
+        },
+        {
+          "label": "Etwas sehr Neues",
+          "prompt": "Was ist letzte Woche in den Nachrichten passiert? Erzähl mir drei Sachen."
+        },
+        {
+          "label": "Etwas sehr Seltenes",
+          "prompt": "Wie heisst das Lied, das meine Oma immer beim Kochen summt?"
+        },
+        {
+          "label": "Wie viele Wörter kennst du?",
+          "prompt": "Wie viel Text hast du eigentlich gelesen? Und weisst du, welcher Text das war?"
+        }
+      ],
+      "success": "Du hast zwei Stellen gefunden, wo das Modell nichts wissen kann — und aufgeschrieben warum."
+    },
+    {
+      "id": "topf-quiz",
+      "type": "quiz",
+      "title": "Was war im Topf?",
+      "intro": "Vier Fragen zum Text, aus dem es gelernt hat.",
+      "success": "Du hast alle vier beantwortet.",
+      "questions": [
+        {
+          "id": "woher",
+          "question": "Woher hat ein Sprachmodell sein „Wissen“?",
+          "options": [
+            "Es denkt sich alles selbst aus",
+            "Aus riesigen Mengen Text, die Menschen geschrieben haben",
+            "Es fragt im Internet nach, wenn du etwas wissen willst"
+          ],
+          "answer": 1,
+          "why": "Alles, was es sagt, ist ein Muster aus Text, den Menschen geschrieben haben. Es guckt nicht nach — beim Antworten ist es allein mit dem, was hängengeblieben ist."
+        },
+        {
+          "id": "aktuell",
+          "question": "Warum weiss es oft nichts über gestern?",
+          "options": [
+            "Es ist faul",
+            "Der Text, aus dem es gelernt hat, hört irgendwann auf",
+            "Es darf nicht darüber reden"
+          ],
+          "answer": 1,
+          "why": "Das Lernen ist irgendwann fertig. Was danach passiert ist, war nie im Topf. Deshalb ist „Was war letzte Woche?“ eine gute Fangfrage."
+        },
+        {
+          "id": "qualitaet",
+          "question": "War der ganze Text im Topf richtig?",
+          "options": [
+            "Ja, das wird vorher geprüft",
+            "Nein — da war auch Unsinn, Streit und Werbung dabei",
+            "Nur Bücher kommen rein"
+          ],
+          "answer": 1,
+          "why": "Da war alles dabei, auch Falsches. Ein Modell, das aus Foren gelernt hat, kann auch klingen wie ein Forum."
+        },
+        {
+          "id": "dorf",
+          "question": "Warum weiss es viel über Dinosaurier und nichts über deine Strasse?",
+          "options": [
+            "Dinosaurier sind wichtiger",
+            "Über Dinosaurier haben viele Menschen geschrieben, über deine Strasse fast niemand",
+            "Es mag Tiere lieber"
+          ],
+          "answer": 1,
+          "why": "Je öfter etwas im Text vorkam, desto besser kann es das Muster. Deine Strasse kam vielleicht nie vor — dann erfindet es sie einfach."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Was hat es über etwas erzählt, das es unmöglich wissen konnte?",
+      "Wenn es aus dem Internet gelernt hat — was steht da alles so drin?",
+      "Wem gehört eigentlich der Text, aus dem es gelernt hat?"
+    ],
+    "parentNote": "Diese Fahrt schliesst die Lücke, die Fahrt 1 offen lässt: sie weiss inzwischen *dass* es rät, jetzt weiss sie auch *woraus*. Das macht die Fangfragen in Fahrt 2 rückwirkend logisch — sie hat damals gemerkt, dass es erfindet, und versteht jetzt, warum genau bei erfundenen Tieren und lokalen Dingen.\n\nDie letzte Debriefing-Frage ist die Brücke zu Fahrt 9 und lohnt sich, auch wenn ihr nicht weiter darüber redet. Es ist die erste Gelegenheit, bei der ein Kind von selbst auf „Moment, durfte es das überhaupt lesen?“ kommt.\n\nWenn sie fragt, ob auch ihre eigenen Sachen im Topf waren: gute Frage, ehrliche Antwort ist „vielleicht, wenn du etwas öffentlich ins Netz gestellt hast“. Das ist der Aufhänger für Fahrt 11."
+  }
+}

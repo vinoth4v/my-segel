@@ -3,6 +3,7 @@ import { badRequest, body, guard } from "@/segel/guard"
 import { callStation, zooTrio } from "@/segel/router"
 import { checkInput, checkOutput, systemFor } from "@/segel/safety"
 import { recordTurn } from "@/segel/store"
+import { LETTER_TAG } from "@/segel/zoo"
 
 /**
  * Der Modell-Zoo: one question, three models, labelled A, B and C.
@@ -48,10 +49,10 @@ export async function POST(request: Request) {
   })
 
   const settled = await Promise.allSettled(
-    trio.map((model) =>
+    trio.map((lane) =>
       callStation("zoo", [{ role: "user", content: verdict.text }], {
         system,
-        overrideModel: model,
+        overrideLane: lane,
       }),
     ),
   )
@@ -60,7 +61,7 @@ export async function POST(request: Request) {
   const answers = await Promise.all(
     settled.map(async (result, index) => {
       const letter = letters[index] ?? String(index)
-      const model = trio[index] ?? ""
+      const lane = trio[index] ?? ""
 
       if (result.status === "rejected") {
         await recordTurn({
@@ -68,19 +69,24 @@ export async function POST(request: Request) {
           stationId: station.id,
           stationType: "zoo",
           role: "modell",
-          content: `[${letter}] keine Antwort: ${String(result.reason).slice(0, 200)}`,
+          content: `${LETTER_TAG}${letter} keine Antwort: ${String(result.reason).slice(0, 200)}`,
         })
         return { letter, text: "", failed: true }
       }
 
       const output = checkOutput(result.value.text)
+
+      // The letter is written into the row so the reveal can pair it with the
+      // `servedBy` this same row records. That pairing is the only place the
+      // mapping exists — deliberately server-side, so the browser cannot read
+      // it before she has committed to a ranking.
       await recordTurn({
         voyageId: voyage.id,
         stationId: station.id,
         stationType: "zoo",
         role: "modell",
-        content: `[${letter}] ${output.text}`,
-        call: { ...result.value.call, model },
+        content: `${LETTER_TAG}${letter} ${output.text}`,
+        call: { ...result.value.call, model: lane },
         flagged: !output.ok,
       })
 
@@ -88,7 +94,5 @@ export async function POST(request: Request) {
     }),
   )
 
-  // `trio` is returned so the client can ask for the reveal, but the client
-  // is not told which letter maps to which model until it posts a ranking.
   return Response.json({ question: verdict.text, answers, round: input.round ?? 0 })
 }

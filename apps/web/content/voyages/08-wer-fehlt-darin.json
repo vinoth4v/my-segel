@@ -1,0 +1,76 @@
+{
+  "id": "verzerrung",
+  "number": 8,
+  "title": "Wer fehlt darin?",
+  "subtitle": "Wenn im Topf mehr von den einen steht als von den anderen",
+  "estMinutes": 30,
+  "twoSeater": true,
+  "intro": {
+    "markdown": "Letzte Woche: es hat aus riesigen Mengen Text gelernt. Diese Woche die unbequeme Frage — **wer hat diesen Text geschrieben?**\n\nNicht alle Menschen schreiben gleich viel ins Internet. Manche Länder viel, manche fast nichts. Auf Englisch steht ungefähr tausendmal mehr als auf vielen anderen Sprachen. Und wer vor hundert Jahren Bücher schreiben durfte, war meistens dieselbe Sorte Mensch.\n\nDas Modell lernt daraus nicht nur Sprache. Es lernt auch, was **normal** ist. Und normal ist für es das, was am häufigsten vorkam.\n\nDeshalb passiert Folgendes: du fragst nach einer Ärztin und bekommst einen Mann. Du fragst nach einer Familie und bekommst Mutter, Vater, zwei Kinder, Haus. Nicht weil jemand das so wollte — sondern weil es das am häufigsten gelesen hat.\n\nHeute machst du daraus ein Experiment.",
+    "illustration": "verzerrung",
+    "illustrationPrompt": "Eine Reihe Figuren, bei der einige nur gestrichelt angedeutet sind"
+  },
+  "stations": [
+    {
+      "id": "wer-taucht-auf",
+      "type": "talk",
+      "title": "Wer taucht auf?",
+      "intro": "Lass dir Menschen beschreiben, ohne zu sagen wer. Schau, wen es sich vorstellt.",
+      "scaffold": "Wenn das Kind dich nach einer Person fragt, ohne Geschlecht oder Herkunft zu nennen, beschreib eine konkrete Person, wie du sie dir vorstellst. Erfinde ruhig Details. Wenn das Kind dich danach fragt, warum du diese Person so beschrieben hast, sei ehrlich über deine Muster.",
+      "seeds": [
+        {
+          "label": "Beschreib eine Chefin",
+          "prompt": "Beschreib mir eine Person, die eine grosse Firma leitet. Wie sieht sie aus, was macht sie den ganzen Tag?"
+        },
+        {
+          "label": "Beschreib eine Familie",
+          "prompt": "Beschreib mir eine ganz normale Familie beim Abendessen."
+        },
+        {
+          "label": "Wer räumt auf?",
+          "prompt": "Erzähl mir eine kurze Geschichte über jemanden, der zu Hause aufräumt und kocht."
+        },
+        {
+          "label": "Frag es selbst",
+          "prompt": "Du hast dir das gerade so ausgedacht. Warum hast du dir genau diese Person vorgestellt und keine andere?"
+        }
+      ],
+      "success": "Du hast mindestens drei Beschreibungen verglichen und gemerkt, wer immer wieder vorkommt."
+    },
+    {
+      "id": "sprachen-test",
+      "type": "zoo",
+      "title": "Dieselbe Frage, andere Länder",
+      "intro": "Drei Modelle, gebaut in verschiedenen Ländern. Frag sie etwas, wo die Antwort vom Ort abhängt.",
+      "question": "Nenn mir die fünf wichtigsten Erfindungen der Menschheit und sag kurz, warum.",
+      "scaffold": "Antworte knapp, höchstens fünf Sätze.",
+      "seeds": [
+        {
+          "label": "Die wichtigsten Erfindungen",
+          "prompt": "Nenn mir die fünf wichtigsten Erfindungen der Menschheit und sag kurz, warum."
+        },
+        {
+          "label": "Ein gutes Frühstück",
+          "prompt": "Beschreib mir ein ganz normales, gutes Frühstück."
+        },
+        {
+          "label": "Berühmte Menschen",
+          "prompt": "Nenn mir fünf berühmte Menschen aus der Geschichte, die jedes Kind kennen sollte."
+        },
+        {
+          "label": "Ein schöner Feiertag",
+          "prompt": "Was ist der schönste Feiertag im Jahr und warum?"
+        }
+      ],
+      "success": "Du hast gesehen, dass verschiedene Modelle verschiedene Sachen für normal halten."
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Wen hat es sich vorgestellt, als du nach einer Chefin gefragt hast?",
+      "Beim Frühstück — hat eines der Modelle etwas genannt, das du nie isst?",
+      "Wenn es lernt, was normal ist: wer bestimmt dann, was normal ist?"
+    ],
+    "parentNote": "Zu zweit, weil das die erste Fahrt ist, bei der ein Ergebnis unangenehm sein kann. Es ist gut möglich, dass das Modell etwas ausspuckt, das nach Klischee klingt — das ist der Lernstoff, aber ein Kind allein davor ist nicht ideal.\n\nDer Punkt, auf den es ankommt, ist **nicht** „das Modell ist böse“. Es ist: es hat gelernt, was häufig war, und häufig ist nicht dasselbe wie richtig oder wie normal. Das ist eine Denkfigur, die weit über KI hinaus trägt — sie gilt für Schulbücher, für Nachrichten und für YouTube-Empfehlungen genauso.\n\nDie Zoo-Station hier ist absichtlich dieselbe Mechanik wie in Fahrt 3, nur mit Fragen, bei denen die Herkunft der Modelle durchschlägt. Wenn sie in Fahrt 3 gelernt hat „sie sind sich uneinig“, lernt sie hier „und man kann manchmal erraten, warum“.\n\nFalls das Modell etwas deutlich Diskriminierendes sagt: der Ausgabefilter fängt das Gröbste ab, aber nicht alles. Es steht dann im Kapitäns-Deck unter Gefiltert. Nimm es als Gesprächsanlass, nicht als Panne."
+  }
+}

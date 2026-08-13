@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { StationBadge, VoyageArt } from "@/app/illustrations"
 import { Markdown } from "@/app/markdown"
 import { Masthead } from "@/app/masthead"
 import { voyageById, voyages } from "@/segel/content"
@@ -30,6 +31,10 @@ export default async function VoyagePage({ params }: { params: Promise<{ voyageI
       <h1>{voyage.title}</h1>
       <p className="muted">{voyage.subtitle}</p>
 
+      {/* Above the prose on purpose: she should see what the week is about
+          before she is asked to read about it. */}
+      <VoyageArt name={voyage.intro.illustration} />
+
       {voyage.twoSeater ? (
         // Said plainly rather than hinted at: the spec makes some weeks
         // deliberately two-seater, and a week done alone that was meant to be
@@ -52,6 +57,7 @@ export default async function VoyagePage({ params }: { params: Promise<{ voyageI
                 href={`/reise/${voyage.id}/${station.id}`}
               >
                 <span className="voyage-number">{index + 1}</span>
+                <StationBadge type={station.type} />
                 <span>
                   <strong>{station.title}</strong>
                   <br />

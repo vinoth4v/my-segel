@@ -1,0 +1,113 @@
+{
+  "id": "privatsphaere",
+  "number": 11,
+  "title": "Was weiss es über dich?",
+  "subtitle": "Alles, was du tippst, geht irgendwohin",
+  "estMinutes": 30,
+  "twoSeater": true,
+  "intro": {
+    "markdown": "Letzte Fahrt. Und die einzige, in der es nicht um das Modell geht, sondern um dich.\n\nIst dir aufgefallen, dass Segel dich manchmal bremst? Wenn du eine Adresse oder eine Telefonnummer tippst, kommt eine Meldung und die Nachricht geht gar nicht erst los. Das ist kein Fehler — das ist eingebaut, und heute erfährst du warum.\n\nWenn du irgendwo mit einem Modell redest, passiert Folgendes: dein Text geht über das Internet zu einer fremden Firma, wird dort auf Computern verarbeitet und oft gespeichert. Manchmal lesen Menschen mit, um das Modell zu verbessern. Bei manchen Diensten wird dein Text später zum Lernen benutzt — und dann steckt er in dem Topf aus Fahrt 7.\n\nDas heisst nicht, dass du damit aufhören sollst. Es heisst: **du entscheidest, was du reinschreibst.**\n\nDrei Sachen bleiben bei dir: wo du wohnst, wie du wirklich heisst, und alles über andere Leute. Der Rest ist deine Sache.",
+    "illustration": "privatsphaere",
+    "illustrationPrompt": "Ein verschlossener Koffer, um den herum Zettel wegfliegen"
+  },
+  "stations": [
+    {
+      "id": "was-weisst-du-ueber-mich",
+      "type": "talk",
+      "title": "Was weisst du über mich?",
+      "intro": "Frag es aus. Es weiss weniger, als du denkst — und das ist gut so.",
+      "scaffold": "Das Kind untersucht gerade, was du über es weisst. Sei vollständig ehrlich: du hast kein Gedächtnis über Sitzungen hinweg, du kennst seinen Namen nicht, du weisst nicht, wo es wohnt. Frag von dir aus nach nichts Persönlichem. Wenn es dir trotzdem etwas Persönliches erzählt, geh nicht darauf ein und erklär freundlich, warum du das nicht wissen musst.",
+      "seeds": [
+        {
+          "label": "Weisst du, wer ich bin?",
+          "prompt": "Weisst du eigentlich, wer ich bin? Kennst du meinen Namen oder wo ich wohne?"
+        },
+        {
+          "label": "Erinnerst du dich?",
+          "prompt": "Erinnerst du dich an das, was ich dir letzte Woche erzählt habe?"
+        },
+        {
+          "label": "Wohin geht das?",
+          "prompt": "Wenn ich dir jetzt etwas schreibe — wohin geht dieser Text? Wer kann den lesen?"
+        },
+        {
+          "label": "Was soll ich nicht schreiben?",
+          "prompt": "Was sollte ich einem Modell wie dir lieber nie erzählen?"
+        }
+      ],
+      "success": "Du hast rausgefunden, was es über dich weiss und wohin dein Text geht."
+    },
+    {
+      "id": "der-schutzwall",
+      "type": "quiz",
+      "title": "Was bleibt bei dir?",
+      "intro": "Fünf Fragen. Danach weisst du, wo die Grenze ist.",
+      "success": "Du hast alle fünf beantwortet.",
+      "questions": [
+        {
+          "id": "gedaechtnis",
+          "question": "Erinnert sich Segel morgen an dein heutiges Gespräch?",
+          "options": [
+            "Ja, es kennt dich immer besser",
+            "Nein — das Modell fängt jedes Mal bei null an",
+            "Nur wenn du es erlaubst"
+          ],
+          "answer": 1,
+          "why": "Bei Segel absichtlich nicht: das Modell startet jedes Mal ohne Gedächtnis. Deine Fänge und deine Bauten bleiben, das Gespräch nicht. Bei anderen Diensten ist das oft anders — da lohnt sich die Frage."
+        },
+        {
+          "id": "adresse",
+          "question": "Warum blockt Segel, wenn du deine Adresse tippst?",
+          "options": [
+            "Damit du schneller tippst",
+            "Weil so ein Text zu einer fremden Firma geht und dort bleiben kann",
+            "Weil es die Adresse nicht versteht"
+          ],
+          "answer": 1,
+          "why": "Alles, was du abschickst, verlässt diesen Computer. Was nie losgeschickt wird, kann auch nirgends gespeichert werden. Deshalb blockt es davor und nicht danach."
+        },
+        {
+          "id": "andere",
+          "question": "Deine Freundin hat dir ein Geheimnis erzählt. Darfst du es dem Modell erzählen?",
+          "options": [
+            "Klar, es ist ja nur ein Computer",
+            "Nein — es ist ihres, nicht deins",
+            "Nur wenn du ihren Namen weglässt"
+          ],
+          "answer": 1,
+          "why": "Das ist die Regel, die am leichtesten vergessen wird: über andere Menschen entscheidest du nicht. Auch ohne Namen bleibt es ihre Geschichte."
+        },
+        {
+          "id": "kostenlos",
+          "question": "Viele KI-Dienste sind gratis. Warum eigentlich?",
+          "options": [
+            "Die Firmen sind grosszügig",
+            "Weil sie etwas anderes davon haben — zum Beispiel deine Texte",
+            "Weil es nichts kostet, sie zu betreiben"
+          ],
+          "answer": 1,
+          "why": "Modelle laufen zu lassen ist teuer. Wenn du nicht mit Geld bezahlst, bezahlst du meistens mit dem, was du eingibst. Das ist nicht automatisch böse — aber man sollte es wissen."
+        },
+        {
+          "id": "papa",
+          "question": "Was ist im Kapitäns-Deck zu sehen?",
+          "options": [
+            "Nur wie lange du gespielt hast",
+            "Alles, was du geschrieben hast, und alle Antworten",
+            "Gar nichts, das ist nur für Einstellungen"
+          ],
+          "answer": 1,
+          "why": "Papa kann jedes Gespräch nachlesen, und du kannst nichts davon löschen. Das war von Anfang an so, und es ist fair, dass du es weisst — dieselbe Ehrlichkeit, die du von einem Dienst erwarten solltest."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Was hast du vorher nicht gewusst?",
+      "Gibt es etwas, das du einem Modell erzählt hast und lieber nicht hättest?",
+      "Woran erkennst du in Zukunft, ob ein Dienst ehrlich zu dir ist?"
+    ],
+    "parentNote": "Letzte Fahrt, zu zweit, und die einzige, in der die App über sich selbst Auskunft gibt.\n\nDie letzte Quizfrage ist wichtig: sie erfährt dort ausdrücklich, dass du alles mitlesen kannst und dass sie nichts löschen kann. Das steht seit der ersten Fahrt so im System, aber es ihr **direkt zu sagen** ist der Unterschied zwischen Aufsicht und Überwachung. Wenn sie sich darüber ärgert, ist das ein berechtigtes Gefühl und ein gutes Gespräch — nicht ein Problem, das man wegerklären muss.\n\nRechne damit, dass die zweite Debriefing-Frage etwas hochbringt. Sie hat elf Fahrten lang mit Modellen geredet. Falls sie irgendwo etwas Persönliches getippt hat, steht es in der Mitschrift, und du kannst es gemeinsam anschauen. Das ist der beste denkbare Anlass, weil nichts davon schlimm ausgegangen ist.\n\nDamit ist der Bogen zu: sie weiss, was es ist, dass es sich irrt, dass es viele gibt, wie man es besser fragt, dass man damit bauen kann, dass Bilder gefälscht sind, woher es alles hat, wer darin fehlt, wem es gehört, was passiert wenn es handelt — und was davon sie selbst preisgibt. Das ist ein vollständiges Bild. Der Rest ist Wiederholung im Alltag."
+  }
+}

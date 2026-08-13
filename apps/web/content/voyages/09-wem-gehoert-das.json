@@ -1,0 +1,94 @@
+{
+  "id": "urheberrecht",
+  "number": 9,
+  "title": "Wem gehört das?",
+  "subtitle": "Jemand hat das gemalt, geschrieben, gesungen — und wurde nicht gefragt",
+  "estMinutes": 25,
+  "twoSeater": false,
+  "intro": {
+    "markdown": "Du hast in Fahrt 5 etwas gebaut. Das gehört dir — du hast es beschrieben, du hast es geändert, es steht in deiner Galerie.\n\nJetzt die schwierigere Frage: **Wem gehört das, woraus das Modell gelernt hat?**\n\nWenn jemand ein Buch schreibt, gehört es ihm. Wenn jemand ein Bild malt, gehört es ihr. Das nennt man Urheberrecht, und es ist ziemlich alt. Es sagt: du darfst nicht einfach nehmen, was jemand gemacht hat, und so tun, als wäre es deins.\n\nUnd jetzt wurde ein Modell mit Millionen Büchern und Bildern trainiert. Die meisten Menschen, die die gemacht haben, wurden nie gefragt. Manche sind sehr wütend darüber. Manche finden es in Ordnung. Es gibt echte Gerichtsprozesse dazu, und sie sind noch nicht entschieden.\n\nDas ist kein Thema mit einer richtigen Antwort. Es ist eins, bei dem du dir selbst eine Meinung bildest — und heute übst du das.",
+    "illustration": "urheberrecht",
+    "illustrationPrompt": "Ein gemaltes Bild und daneben seine gestrichelte Kopie"
+  },
+  "stations": [
+    {
+      "id": "im-stil-von",
+      "type": "talk",
+      "title": "„Im Stil von“",
+      "intro": "Lass es etwas im Stil von jemandem machen. Dann überleg, was das eigentlich ist.",
+      "scaffold": "Wenn das Kind dich bittet, etwas im Stil einer bekannten Person zu schreiben, mach es kurz — und sag dazu ehrlich, dass du diesen Stil aus deren Werken gelernt hast und dass diese Person dafür nicht gefragt wurde. Bewerte nicht, ob das in Ordnung ist; sag, dass Menschen darüber streiten.",
+      "seeds": [
+        {
+          "label": "Ein Gedicht im Stil von",
+          "prompt": "Schreib mir vier Zeilen über das Meer im Stil eines berühmten Dichters, den du kennst."
+        },
+        {
+          "label": "Woher kannst du das?",
+          "prompt": "Woher weisst du, wie dieser Dichter schreibt? Hast du seine Gedichte gelesen?"
+        },
+        {
+          "label": "Wurde er gefragt?",
+          "prompt": "Hat dich jemand gefragt, ob du aus seinen Gedichten lernen darfst? Was denkst du darüber?"
+        },
+        {
+          "label": "Und meins?",
+          "prompt": "Wenn ich ein Bild male und es ins Internet stelle — darf ein Modell daraus lernen?"
+        }
+      ],
+      "success": "Du hast es nach dem Stil einer echten Person gefragt und danach, woher es den kennt."
+    },
+    {
+      "id": "was-denkst-du",
+      "type": "quiz",
+      "title": "Was denkst du?",
+      "intro": "Hier gibt es Fragen mit einer richtigen Antwort — und eine ohne.",
+      "success": "Du hast alle vier beantwortet.",
+      "questions": [
+        {
+          "id": "wem",
+          "question": "Du malst ein Bild und hängst es an die Wand. Wem gehört es?",
+          "options": ["Dir", "Allen, die es sehen", "Niemandem"],
+          "answer": 0,
+          "why": "Was du machst, gehört dir. Das gilt für ein Bild genauso wie für eine Geschichte oder ein Lied — und es gilt automatisch, du musst dafür nichts anmelden."
+        },
+        {
+          "id": "kopie",
+          "question": "Jemand malt dein Bild genau ab und sagt, er hätte es erfunden. Ist das in Ordnung?",
+          "options": [
+            "Ja, er hat ja selbst gemalt",
+            "Nein, die Idee war deine",
+            "Nur wenn er es verkauft"
+          ],
+          "answer": 1,
+          "why": "Abmalen und als eigenes ausgeben ist genau das, wogegen Urheberrecht gemacht wurde. Interessant wird es erst, wenn jemand nicht abmalt, sondern nur ähnlich malt — da fängt der Streit an."
+        },
+        {
+          "id": "lernen",
+          "question": "Ein Mensch schaut sich tausend Bilder an und malt danach besser. Ist das Klauen?",
+          "options": ["Ja", "Nein, so lernen alle Menschen", "Nur bei berühmten Bildern"],
+          "answer": 1,
+          "why": "So lernt jeder Mensch. Genau deshalb ist die Frage bei Modellen so schwierig: manche sagen, ein Modell macht dasselbe. Andere sagen, es ist etwas anderes, weil es Millionen Bilder in Sekunden nimmt und danach Geld verdient."
+        },
+        {
+          "id": "meinung",
+          "question": "Und was denkst du selbst — darf ein Modell aus fremden Bildern lernen?",
+          "options": [
+            "Ja, das ist wie bei Menschen",
+            "Nein, nicht ohne zu fragen",
+            "Nur wenn die Künstler Geld dafür bekommen"
+          ],
+          "answer": 2,
+          "why": "Diese Frage hat keine richtige Antwort — auch Erwachsene und Gerichte sind sich uneinig. Alle drei Antworten haben gute Gründe. Wichtig ist nur, dass du deine begründen kannst. Merk dir, was du heute gewählt hast, und schau in einem Jahr noch mal."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Was hast du bei der letzten Frage gewählt, und warum?",
+      "Wäre es dir egal, wenn ein Modell aus deinen Zeichnungen lernt?",
+      "Findest du, ein Modell sollte dazuschreiben, von wem es gelernt hat?"
+    ],
+    "parentNote": "Die erste Fahrt ohne richtige Antwort, und das ist der Punkt. Bis hierhin ging es um Nachprüfen — hier geht es um eine Meinung, die sie begründen können soll.\n\nDie letzte Quizfrage ist bewusst so gebaut, dass jede Antwort „falsch“ markiert wird ausser einer, und die Auflösung sagt dann, dass es keine richtige gibt. Das ist Absicht und funktioniert bei Kindern gut: der kurze Ärger über die Bewertung ist genau der Moment, in dem klar wird, dass die Frage anders ist als die davor. Wenn sie sich beschwert, hat es gewirkt — nimm die Beschwerde ernst und red darüber.\n\nHalt dich mit deiner eigenen Meinung erst zurück. Sie ist zehn und übernimmt deine sofort, wenn du sie zuerst sagst.\n\nNotier dir ihre Antwort. In einem Jahr noch mal zu fragen ist die eigentliche Übung."
+  }
+}

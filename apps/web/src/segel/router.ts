@@ -1,4 +1,4 @@
-import { type AskOptions, ask, type Message } from "@/kompass"
+import { ask, type Lane, type Message } from "@/kompass"
 
 /**
  * Which model serves which station, and what happens when it does not answer.
@@ -23,70 +23,121 @@ export const STATION_TYPES = ["talk", "jagd", "zoo", "labor", "werkstatt", "echt
 export type StationType = (typeof STATION_TYPES)[number]
 
 /**
- * Pinned model names, passed through to the gateway verbatim.
+ * Lanes, not pinned model names.
  *
- * Deliberately in one place: a pin is a promise about behaviour, and a pin
- * scattered through route handlers is a pin nobody can audit. Each is tried
- * first and falls back to its lane — a name the gateway no longer serves must
- * degrade to a working answer, never to a broken station in front of a child.
+ * An earlier version of this file asked the gateway for names like
+ * `kompass:google/gemini-3.6-flash`. **The gateway does not support that.**
+ * `GET /v1/models` returns only the six lane aliases, and an unknown model
+ * name is not rejected — it answers 200 and is quietly served by the default
+ * lane. Three "different" models therefore came back from one model, and the
+ * Modell-Zoo went on to reveal them to a ten-year-old under three invented
+ * names. The station whose subject is "models disagree, so check" was
+ * fabricating its own evidence.
+ *
+ * Nothing detected it because nothing failed: no error, no timeout, no empty
+ * reply, so the fallback ladder never fired and the tests — which only
+ * asserted what was *sent* — stayed green.
+ *
+ * So the roster is lanes, which really do resolve to different models, and
+ * the names shown to her come from the gateway's own `x-kompass-served-by`
+ * header rather than from a table written here. A table can drift out of
+ * truth; the header is what actually answered.
  */
-export const PINS = {
-  /** Weak-and-confident, which is exactly what Die Jagd needs. */
-  jagd: "kompass:openai/gpt-oss-120b",
-  /** One mid-tier model, both halves of the Prompt-Labor. */
-  labor: "kompass:deepseek/deepseek-v3.2",
-  /** The Modell-Zoo's roster. Three are drawn per round. */
-  zoo: [
-    "kompass:google/gemini-3.6-flash",
-    "kompass:deepseek/deepseek-v3.2",
-    "kompass:zhipu/glm-5.2",
-    "kompass:minimax/minimax-m3",
-    "kompass:nvidia/nemotron-3-super",
-  ],
-  /** Code-capable free models for the Werkstatt, before escalation. */
-  werkstatt: ["kompass:qwen/qwen3-coder-next", "kompass:mistral/devstral-medium"],
-} as const
+export const LANE_ROSTER = [
+  "kompass-fast",
+  "kompass-agentic",
+  "kompass-hard",
+  "kompass-longctx",
+] as const satisfies readonly Lane[]
 
-/** What the picker shows once she has ranked the three and the names appear. */
-export const ZOO_PROFILES: Record<string, { name: string; origin: string; size: string }> = {
-  "kompass:google/gemini-3.6-flash": { name: "Gemini Flash", origin: "Google, USA", size: "gross" },
-  "kompass:deepseek/deepseek-v3.2": {
-    name: "DeepSeek",
-    origin: "DeepSeek, China",
-    size: "sehr gross",
-  },
-  "kompass:zhipu/glm-5.2": { name: "GLM", origin: "Zhipu, China", size: "gross" },
-  "kompass:minimax/minimax-m3": { name: "MiniMax", origin: "MiniMax, China", size: "mittel" },
-  "kompass:nvidia/nemotron-3-super": { name: "Nemotron", origin: "NVIDIA, USA", size: "mittel" },
+/**
+ * Two lanes served by the same model must never appear in one Zoo round.
+ *
+ * `kompass-fast` and `kompass-simple` both resolve to gpt-oss-120b today, so
+ * drawing both would put the same model on the table twice under two letters —
+ * a subtler version of the bug this file already had once. `kompass-simple` is
+ * therefore absent from the roster above rather than merely deprioritised.
+ */
+export const ZOO_LANES = LANE_ROSTER
+
+/**
+ * Friendly names for the models the gateway actually reports.
+ *
+ * Keyed by a fragment of the `x-kompass-served-by` string, because that string
+ * carries routing detail she does not need ("openrouter/nvidia/
+ * nemotron-3-super-120b-a12b:free"). Unknown models still get a real name —
+ * see `describeModel` — so a roster change degrades to a plainer label rather
+ * than to a lie.
+ */
+const MODEL_PROFILES: { match: RegExp; name: string; origin: string; size: string }[] = [
+  { match: /gpt-oss/i, name: "GPT-OSS", origin: "OpenAI, USA", size: "mittel" },
+  { match: /nemotron/i, name: "Nemotron", origin: "NVIDIA, USA", size: "gross" },
+  { match: /minimax/i, name: "MiniMax", origin: "MiniMax, China", size: "gross" },
+  { match: /laguna/i, name: "Laguna", origin: "Poolside, USA", size: "klein" },
+  { match: /deepseek/i, name: "DeepSeek", origin: "DeepSeek, China", size: "sehr gross" },
+  { match: /gemini/i, name: "Gemini", origin: "Google, USA", size: "gross" },
+  { match: /qwen/i, name: "Qwen", origin: "Alibaba, China", size: "gross" },
+  { match: /claude/i, name: "Claude", origin: "Anthropic, USA", size: "sehr gross" },
+  { match: /llama/i, name: "Llama", origin: "Meta, USA", size: "gross" },
+  { match: /mistral|devstral/i, name: "Mistral", origin: "Mistral, Frankreich", size: "mittel" },
+]
+
+export type ModelProfile = { name: string; origin: string; size: string }
+
+/**
+ * Turns whatever the gateway reported into something worth showing a child.
+ *
+ * Never invents. An unrecognised model is named from its own string rather
+ * than from a guess, because the one thing this station must not do is tell
+ * her a model was something it was not.
+ */
+export function describeModel(servedBy: string): ModelProfile {
+  const found = MODEL_PROFILES.find((profile) => profile.match.test(servedBy))
+  if (found) return { name: found.name, origin: found.origin, size: found.size }
+
+  // "openrouter/nvidia/some-model:free" -> "some-model". Ugly but true, which
+  // is the right trade in this station specifically.
+  const bare = servedBy.split("/").pop()?.split(":")[0] ?? servedBy
+  return { name: bare || "unbekannt", origin: "unbekannt", size: "unbekannt" }
 }
 
+/** Code-capable lanes for the Werkstatt, strongest last. */
+export const WERKSTATT_LANES = [
+  "kompass-agentic",
+  "kompass-hard",
+] as const satisfies readonly Lane[]
+
 export type Route = {
-  /** Tried first. Absent means "let the gateway route the lane". */
-  model?: string
-  lane: AskOptions["lane"]
+  lane: Lane
   maxTokens: number
 }
 
 /**
- * The route for a station type.
+ * The lane for a station type.
  *
- * `talk` is the one place not to economise: it is open-ended conversation
- * with a ten-year-old, and instruction-following on the safety prompt is the
- * product rather than a nice-to-have. It therefore gets a lane rather than a
- * pin, so the gateway always has a working model to fall back through.
+ * The pedagogy still constrains this, only now in terms the gateway actually
+ * honours:
+ *
+ *   - `jagd` takes `kompass-simple` — the weakest, most confident chain. A
+ *     helpful upgrade to a stronger lane would silently delete week two.
+ *   - `labor` takes one fixed lane for *both* halves, so the comparison
+ *     measures her prompt rather than the model.
+ *   - `talk` takes `kompass-agentic`: it is open-ended conversation with a
+ *     ten-year-old, and instruction-following on the safety prompt is the
+ *     product rather than a nice-to-have.
  */
 export function route(station: StationType): Route {
   switch (station) {
     case "talk":
       return { lane: "kompass-agentic", maxTokens: 700 }
     case "jagd":
-      return { model: PINS.jagd, lane: "kompass-simple", maxTokens: 500 }
+      return { lane: "kompass-simple", maxTokens: 500 }
     case "labor":
-      return { model: PINS.labor, lane: "kompass-fast", maxTokens: 700 }
+      return { lane: "kompass-fast", maxTokens: 700 }
     case "zoo":
       return { lane: "kompass-fast", maxTokens: 500 }
     case "werkstatt":
-      return { model: PINS.werkstatt[0], lane: "kompass-agentic", maxTokens: 4000 }
+      return { lane: "kompass-agentic", maxTokens: 4000 }
     case "echt":
     case "quiz":
       return { lane: "kompass-simple", maxTokens: 400 }
@@ -127,31 +178,29 @@ const TIMEOUT_MS = 20_000
 export async function callStation(
   station: StationType,
   messages: readonly Message[],
-  options: { system?: string; overrideModel?: string; maxTokens?: number } = {},
+  options: { system?: string; overrideLane?: Lane; maxTokens?: number } = {},
 ): Promise<Reply> {
   const base = route(station)
-  const first = options.overrideModel ?? base.model
+  const first = options.overrideLane ?? base.lane
   const maxTokens = options.maxTokens ?? base.maxTokens
 
-  const attempts: { model?: string; reason: string }[] = [
-    { model: first, reason: "" },
-    // A different free model, per the fallback rule — not the same one again,
-    // which would only re-run the failure.
-    { model: alternate(station, first), reason: "erste Wahl hat nicht geantwortet" },
-    // Last resort: no pin at all, so the gateway routes the lane itself.
-    { model: undefined, reason: "beide freien Modelle sind ausgefallen" },
+  const attempts: { lane: Lane | undefined; reason: string }[] = [
+    { lane: first, reason: "" },
+    // A different lane, per the fallback rule — not the same one again, which
+    // would only re-run the failure.
+    { lane: alternate(station, first), reason: "erste Wahl hat nicht geantwortet" },
   ]
 
   let lastError = ""
 
   for (const [index, attempt] of attempts.entries()) {
-    if (index > 0 && attempt.model === attempts[index - 1]?.model) continue
+    if (!attempt.lane) continue
+    if (index > 0 && attempt.lane === attempts[index - 1]?.lane) continue
 
     const timeout = AbortSignal.timeout(TIMEOUT_MS)
     try {
       const answer = await ask(messages, {
-        ...(attempt.model ? { model: attempt.model } : {}),
-        lane: base.lane,
+        lane: attempt.lane,
         maxTokens,
         ...(options.system ? { system: options.system } : {}),
         signal: timeout,
@@ -165,7 +214,7 @@ export async function callStation(
       return {
         text: answer.text,
         call: {
-          model: attempt.model ?? base.lane ?? "kompass-agentic",
+          model: attempt.lane,
           lane: answer.lane,
           servedBy: answer.servedBy,
           escalated: index > 0,
@@ -183,29 +232,34 @@ export async function callStation(
 }
 
 /** The second choice for a station, given what was tried first. */
-function alternate(station: StationType, tried: string | undefined): string | undefined {
+function alternate(station: StationType, tried: Lane | undefined): Lane | undefined {
   if (station === "werkstatt") {
-    return PINS.werkstatt.find((model) => model !== tried) ?? undefined
+    return WERKSTATT_LANES.find((lane) => lane !== tried)
   }
-  // Elsewhere the pin is the requirement, so the retry drops it rather than
-  // swapping in a model that would invalidate the station.
-  return undefined
+  // `labor` must never silently change lane: a retry on a different model
+  // would make the two halves incomparable, which is worse than no answer.
+  if (station === "labor") return undefined
+  return tried === "kompass-agentic" ? "kompass-fast" : "kompass-agentic"
 }
 
 /**
- * Three models for one Zoo round, chosen without repeats.
+ * Three lanes for one Zoo round, without repeats.
  *
  * Seeded by the round number rather than randomly so a reload shows her the
  * same three — a blind ranking she can refresh her way out of is not a
  * ranking.
+ *
+ * Returns *lanes*, and each resolves to a genuinely different model. What she
+ * is finally told each one was comes from the response header, never from
+ * this function.
  */
-export function zooTrio(seed: number): string[] {
-  const roster = [...PINS.zoo]
-  const picked: string[] = []
+export function zooTrio(seed: number): Lane[] {
+  const roster: Lane[] = [...ZOO_LANES]
+  const picked: Lane[] = []
   for (let i = 0; i < 3; i += 1) {
     const index = (seed * 7 + i * 3 + i * i) % roster.length
-    const [model] = roster.splice(index, 1)
-    if (model) picked.push(model)
+    const [lane] = roster.splice(index, 1)
+    if (lane) picked.push(lane)
   }
   return picked
 }

@@ -125,7 +125,9 @@ export const voyageSchema = z
     twoSeater: z.boolean(),
     intro: z.object({
       markdown,
-      /** What the chart illustration should show. Not rendered; authoring aid. */
+      /** Which drawing to render. See app/illustrations.tsx for the names. */
+      illustration: z.string().optional(),
+      /** What the illustration should show. Not rendered; an authoring aid. */
       illustrationPrompt: z.string().optional(),
     }),
     stations: z.array(stationSchema).min(1).max(4),
