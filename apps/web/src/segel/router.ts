@@ -92,12 +92,22 @@ export type ModelProfile = { name: string; origin: string; size: string }
  * her a model was something it was not.
  */
 export function describeModel(servedBy: string): ModelProfile {
-  const found = MODEL_PROFILES.find((profile) => profile.match.test(servedBy))
-  if (found) return { name: found.name, origin: found.origin, size: found.size }
-
-  // "openrouter/nvidia/some-model:free" -> "some-model". Ugly but true, which
-  // is the right trade in this station specifically.
+  // "openrouter/poolside/laguna-xs-2.1:free" -> "laguna-xs-2.1"
   const bare = servedBy.split("/").pop()?.split(":")[0] ?? servedBy
+
+  const found = MODEL_PROFILES.find((profile) => profile.match.test(servedBy))
+  if (found) {
+    // Keep the size variant in the name. Observed live, one lane serves both
+    // laguna-s and laguna-xs, and gpt-oss comes in 20b and 120b — collapsing
+    // those to "Laguna" and "GPT-OSS" would put two cards under one name in
+    // the Zoo and make two genuinely different models look like one. It also
+    // happens to be the lesson: models come in sizes.
+    const variant = bare.match(/-(xs|s|m|l|xl|mini|small|medium|large|\d+b)(?:\b|-)/i)?.[1]
+    const suffix = variant ? ` ${variant.toUpperCase()}` : ""
+    return { name: `${found.name}${suffix}`, origin: found.origin, size: found.size }
+  }
+
+  // Ugly but true, which is the right trade in this station specifically.
   return { name: bare || "unbekannt", origin: "unbekannt", size: "unbekannt" }
 }
 

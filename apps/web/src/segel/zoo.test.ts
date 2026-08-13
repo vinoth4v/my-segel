@@ -15,8 +15,8 @@ describe("pairing letters to the models that answered", () => {
       row("A", "groq/openai/gpt-oss-120b", 1),
     ])
 
-    expect(paired.get("A")?.name).toBe("GPT-OSS")
-    expect(paired.get("B")?.name).toBe("Nemotron")
+    expect(paired.get("A")?.name).toBe("GPT-OSS 120B")
+    expect(paired.get("B")?.name).toBe("Nemotron 120B")
     expect(paired.get("C")?.name).toBe("MiniMax")
   })
 
@@ -38,7 +38,7 @@ describe("pairing letters to the models that answered", () => {
     ])
 
     expect(paired.size).toBe(1)
-    expect(paired.get("A")?.name).toBe("GPT-OSS")
+    expect(paired.get("A")?.name).toBe("GPT-OSS 120B")
   })
 
   it("still pairs a letter whose model failed, so the letters stay aligned", () => {
@@ -48,7 +48,7 @@ describe("pairing letters to the models that answered", () => {
     ])
 
     expect(paired.get("B")?.name).toBe("unbekannt")
-    expect(paired.get("A")?.name).toBe("GPT-OSS")
+    expect(paired.get("A")?.name).toBe("GPT-OSS 120B")
   })
 })
 
@@ -57,6 +57,18 @@ describe("guarding the reveal's honesty", () => {
     const paired = pairLettersToModels([
       row("A", "groq/openai/gpt-oss-120b", 1),
       row("B", "openrouter/nvidia/nemotron-3-super-120b-a12b:free", 2),
+      row("C", "nvidia/minimaxai/minimax-m3", 3),
+    ])
+    expect(distinctModelCount([...paired.values()])).toBe(3)
+  })
+
+  it("counts two models of one family as two, not one", () => {
+    // Observed live: the roster served laguna-xs and laguna-s in the same
+    // sampling run. Counting by friendly name would call this round collapsed
+    // and tell her one machine wrote both — a lie in the other direction.
+    const paired = pairLettersToModels([
+      row("A", "openrouter/poolside/laguna-xs-2.1:free", 1),
+      row("B", "openrouter/poolside/laguna-s-2.1:free", 2),
       row("C", "nvidia/minimaxai/minimax-m3", 3),
     ])
     expect(distinctModelCount([...paired.values()])).toBe(3)

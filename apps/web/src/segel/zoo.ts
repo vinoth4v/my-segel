@@ -56,13 +56,18 @@ export function pairLettersToModels(rows: readonly Row[]): Map<string, RevealedM
 }
 
 /**
- * Whether a round is worth revealing.
+ * How many genuinely different models answered this round.
  *
- * Three answers from fewer than three distinct models means the roster
- * collapsed — the gateway routed two lanes to one model, or a fallback fired.
- * Telling her they were different would repeat the exact bug this station was
- * fixed for, so the reveal says so instead.
+ * Counted on `servedBy`, not on the friendly name. A lane serves a *chain*
+ * rather than a fixed model — observed live, one round returned
+ * `laguna-xs-2.1` and another `laguna-s-2.1` — and those are two different
+ * models that happen to share a family. Counting by name would call that
+ * round collapsed and tell her the same machine wrote both, which is its own
+ * small lie in the opposite direction.
+ *
+ * Fewer than two distinct means the roster really did collapse onto one
+ * model, and the reveal says so rather than naming three.
  */
 export function distinctModelCount(revealed: readonly RevealedModel[]): number {
-  return new Set(revealed.map((entry) => entry.name).filter(Boolean)).size
+  return new Set(revealed.map((entry) => entry.servedBy).filter(Boolean)).size
 }

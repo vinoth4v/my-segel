@@ -161,6 +161,16 @@ across all nine themes.
 - *Suppressing the collapsed-round case.* Showing three names anyway would
   have hidden the remaining fragility from the only person who can act on it.
 
+**Found while the PR gates ran, and fixed before merge.** Sampling the lanes
+repeatedly showed that a lane serves a *chain*, not a fixed model: the same
+lane returned `laguna-xs-2.1` on one call and `laguna-s-2.1` on another, and
+`gpt-oss` appears as both 20b and 120b. Two consequences, both fixed:
+`describeModel` now keeps the size variant ("Laguna XS", "GPT-OSS 120B"), so
+two models of one family do not appear under one name; and
+`distinctModelCount` counts `servedBy` rather than the friendly name, so such
+a round is not wrongly reported as collapsed. The variant is also, usefully,
+the lesson — models come in sizes.
+
 **Open:**
 
 - Still no station has received a real model reply. The token and lanes were

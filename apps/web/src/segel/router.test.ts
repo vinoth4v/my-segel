@@ -77,11 +77,26 @@ describe("the zoo roster", () => {
 
 describe("naming what answered", () => {
   it("names the models this gateway actually reports", () => {
-    // Strings taken from real x-kompass-served-by headers.
-    expect(describeModel("groq/openai/gpt-oss-120b").name).toBe("GPT-OSS")
-    expect(describeModel("openrouter/nvidia/nemotron-3-super-120b-a12b:free").name).toBe("Nemotron")
+    // Every string here was observed in a real x-kompass-served-by header.
+    expect(describeModel("groq/openai/gpt-oss-120b").name).toBe("GPT-OSS 120B")
     expect(describeModel("nvidia/minimaxai/minimax-m3").name).toBe("MiniMax")
-    expect(describeModel("openrouter/poolside/laguna-xs-2.1:free").name).toBe("Laguna")
+    expect(describeModel("google/gemini-3.5-flash-lite").name).toBe("Gemini")
+    expect(describeModel("mistral/mistral-small-latest").name).toBe("Mistral SMALL")
+  })
+
+  it("keeps the size variant, so two models in a family stay two models", () => {
+    // A lane serves a chain, not a fixed model: one sampling run returned
+    // laguna-xs and laguna-s from the same roster. Collapsing both to
+    // "Laguna" would put two Zoo cards under one name.
+    const xs = describeModel("openrouter/poolside/laguna-xs-2.1:free")
+    const s = describeModel("openrouter/poolside/laguna-s-2.1:free")
+    expect(xs.name).toBe("Laguna XS")
+    expect(s.name).toBe("Laguna S")
+    expect(xs.name).not.toBe(s.name)
+
+    expect(describeModel("groq/openai/gpt-oss-20b").name).not.toBe(
+      describeModel("groq/openai/gpt-oss-120b").name,
+    )
   })
 
   it("gives an origin she can learn something from", () => {
