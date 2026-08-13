@@ -22,6 +22,8 @@ import { color } from "./tokens.ts"
  *   kimi-cocoa    — chocolate luxury, caramel gold (Cocoa Hills)
  *   kimi-editorial — sharp monochrome, high contrast (British Museum / Editorial Reader)
  *   kimi-terminal — dark data-dense UI, amber accents (GMT://TERMINAL)
+ *
+ * `segel` is this app's own, and the one it ships with — see its entry.
  */
 
 /** A per-scheme value for each of the semantic colour tokens. Widened from
@@ -29,7 +31,7 @@ import { color } from "./tokens.ts"
  * theme to the default's exact hex strings. */
 type Scheme = { light: string; dark: string }
 type ColorSet = Record<keyof typeof color, Scheme>
-type FontSet = { sans: string; mono: string }
+type FontSet = { display: string; sans: string; mono: string }
 type RadiusSet = { sm: string; md: string; lg: string; full: string }
 
 export type Theme = {
@@ -47,6 +49,27 @@ export const THEMES = {
     inspiration: "The default: quiet zinc and workshop blue.",
     color,
   },
+  segel: {
+    label: "Segel",
+    inspiration:
+      "Harbour chart — deep navy ground, aged paper, signal orange, brass for earned things.",
+    color: {
+      // Dark is the real scheme: navy water, a paper page laid on it. Light is
+      // the same chart printed rather than lit — paper ground, navy ink — so
+      // the app is legible next to a window without becoming a second design.
+      bg: { light: "#e3d8c1", dark: "#12263a" },
+      surface: { light: "#ede3d0", dark: "#1b3550" },
+      fg: { light: "#12263a", dark: "#ede3d0" },
+      muted: { light: "#5c6b7a", dark: "#93a7ba" },
+      border: { light: "#c6b89b", dark: "#27455f" },
+      accent: { light: "#c84a17", dark: "#e8622c" },
+      danger: { light: "#a63328", dark: "#e0685a" },
+      success: { light: "#3f7d74", dark: "#5fa8a0" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
+    },
+    radius: { sm: "0.125rem", md: "0.25rem", lg: "0.375rem", full: "9999px" },
+  },
   madras: {
     label: "Madras",
     inspiration: "From SruthiScribe — warm paper, terracotta, a serif voice.",
@@ -59,8 +82,11 @@ export const THEMES = {
       accent: { light: "#b0421f", dark: "#d96a45" },
       danger: { light: "#a83232", dark: "#d97b6c" },
       success: { light: "#5a7d5a", dark: "#86b386" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
     fontFamily: {
+      display: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
       sans: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
       mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
     },
@@ -77,6 +103,8 @@ export const THEMES = {
       accent: { light: "#16a34a", dark: "#4ade80" },
       danger: { light: "#dc2626", dark: "#f87171" },
       success: { light: "#0d9488", dark: "#2dd4bf" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
     radius: { sm: "0.125rem", md: "0.375rem", lg: "0.5rem", full: "9999px" },
   },
@@ -92,6 +120,8 @@ export const THEMES = {
       accent: { light: "#6d4df6", dark: "#a18aff" },
       danger: { light: "#e5484d", dark: "#ff6369" },
       success: { light: "#2fb37e", dark: "#4cc596" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
   },
   tinte: {
@@ -106,6 +136,8 @@ export const THEMES = {
       accent: { light: "#1a1a1a", dark: "#f2f0ea" },
       danger: { light: "#b3261e", dark: "#ff7a70" },
       success: { light: "#1f7a45", dark: "#63c489" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
     radius: { sm: "0.125rem", md: "0.25rem", lg: "0.375rem", full: "9999px" },
   },
@@ -121,8 +153,11 @@ export const THEMES = {
       accent: { light: "#b85c3e", dark: "#d96a45" },
       danger: { light: "#a83232", dark: "#d97b6c" },
       success: { light: "#5a7d5a", dark: "#86b386" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
     fontFamily: {
+      display: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
       sans: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
       mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
     },
@@ -139,8 +174,11 @@ export const THEMES = {
       accent: { light: "#c9a66b", dark: "#d4b87a" },
       danger: { light: "#b3261e", dark: "#d97b6c" },
       success: { light: "#4a7c59", dark: "#86b386" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
     fontFamily: {
+      display: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
       sans: "Georgia, 'Iowan Old Style', 'Times New Roman', serif",
       mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
     },
@@ -157,8 +195,11 @@ export const THEMES = {
       accent: { light: "#1a1a1a", dark: "#f2f0ea" },
       danger: { light: "#b3261e", dark: "#ff7a70" },
       success: { light: "#1f7a45", dark: "#63c489" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
     fontFamily: {
+      display: "'Helvetica Neue', Arial, sans-serif",
       sans: "'Helvetica Neue', Arial, sans-serif",
       mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
     },
@@ -176,8 +217,11 @@ export const THEMES = {
       accent: { light: "#d97706", dark: "#f59e0b" },
       danger: { light: "#dc2626", dark: "#f87171" },
       success: { light: "#0d9488", dark: "#2dd4bf" },
+      brass: { light: "#8a6f12", dark: "#c9a227" },
+      seaglass: { light: "#3f7d74", dark: "#5fa8a0" },
     },
     fontFamily: {
+      display: "ui-monospace, SFMono-Regular, Menlo, monospace",
       sans: "ui-monospace, SFMono-Regular, Menlo, monospace",
       mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
     },

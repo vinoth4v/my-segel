@@ -68,6 +68,15 @@ export type Message = { role: "user" | "assistant"; content: string }
 export type AskOptions = {
   /** Defaults to the agentic lane. */
   lane?: Lane
+  /**
+   * A concrete gateway pin — `kompass:<provider>/<model>` — used in place of a
+   * lane. Prefer a lane: the gateway's whole value is choosing for you, and a
+   * pin is a deploy the day that model is retired. Segel pins in exactly two
+   * places, both of them pedagogy rather than preference (a deliberately weak
+   * model for the hallucination hunt, and one identical model on both sides of
+   * the prompt comparison) — see lib/router.ts.
+   */
+  model?: string
   /** Hard cap on the reply. Required by the API, so it has a sane default. */
   maxTokens?: number
   system?: string
@@ -105,7 +114,7 @@ export async function ask(messages: readonly Message[], options: AskOptions = {}
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: options.lane ?? "kompass-agentic",
+      model: options.model ?? options.lane ?? "kompass-agentic",
       max_tokens: options.maxTokens ?? 1024,
       ...(options.system ? { system: options.system } : {}),
       messages,

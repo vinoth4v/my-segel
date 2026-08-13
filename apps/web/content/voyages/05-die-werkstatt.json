@@ -1,0 +1,41 @@
+{
+  "id": 5,
+  "slug": "die-werkstatt",
+  "title": "Die Werkstatt",
+  "subtitle": "Jetzt baust du. Du beschreibst, es entsteht.",
+  "estMinutes": 30,
+  "twoSeater": false,
+  "teaches": "Sie kann etwas herstellen, ohne programmieren zu können — und sieht an ihren eigenen Versionen, wie ihre Beschreibungen besser werden.",
+  "intro": {
+    "markdown": "Vier Wochen lang hast du geprüft, verglichen und gefragt. Heute baust du etwas.\n\nDu schreibst keinen Code. Du **beschreibst** — und was du beschreibst, erscheint rechts und funktioniert wirklich. Du kannst draufklicken.\n\nDann sagst du, was anders sein soll. „Mach die Knöpfe orange.“ „Es soll mitzählen.“ „Zu klein.“ Jede Änderung wird gespeichert, mit dem Satz, den du dafür geschrieben hast.\n\nDeshalb kannst du später zurückblättern — durch deine eigenen Versionen. Und da siehst du etwas Nützliches: **deine Beschreibungen werden besser.** Die erste ist meistens zu vage. Die fünfte trifft.\n\nWas fertig ist, kommt in deine Galerie. Zeig es jemandem.",
+    "illustrationPrompt": "Werkbank auf einem Schiff, Messingwerkzeug ordentlich aufgereiht, ein halbfertiges Modellboot, Papierton und Navy"
+  },
+  "stations": [
+    {
+      "id": "werkstatt",
+      "type": "werkstatt",
+      "title": "Werkstatt",
+      "instruction": "Beschreib, was du bauen willst. Je genauer, desto näher kommt es an das, was du im Kopf hast. Danach kannst du so oft ändern, wie du willst.",
+      "estMinutes": 25,
+      "successCondition": "Sie baut etwas, das sie selbst ausgesucht hat, ändert es mindestens dreimal, und zeigt es jemandem.",
+      "ideas": [
+        "Ein Würfel, der würfelt und mitzählt, wie oft welche Zahl kam",
+        "Eine Uhr, die rückwärts läuft, für Hausaufgabenpausen",
+        "Ein Quiz über mein Lieblingstier, mit Punkten",
+        "Ein Zeichenbrett, auf dem man mit der Maus malen kann",
+        "Ein Namensgenerator für Segelboote",
+        "Ein Spiel, bei dem man einen Ball mit den Pfeiltasten fängt",
+        "Eine Tabelle, in die ich eintrage, was ich diese Woche gelesen habe",
+        "Ein Knopf, der bei jedem Druck die Farbe wechselt und dazu sagt, wie die Farbe heißt"
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Vergleich deine erste Beschreibung mit deiner letzten. Was ist der Unterschied?",
+      "Was ist beim ersten Versuch nicht so gekommen, wie du wolltest?",
+      "Wem hast du es gezeigt, und was hat die Person gesagt?"
+    ],
+    "parentNote": "Das Zurückblättern durch die Versionen ist hier der eigentliche Unterricht, nicht das fertige Ding — sie sieht ihre eigene Sprache präziser werden. Fragen Sie sie, ihre erste und ihre letzte Beschreibung laut vorzulesen. Wenn ein Bauversuch scheitert, eskaliert die App still auf ein stärkeres Modell; das steht im Kapitäns-Deck unter Eskalationen und ist die einzige Stelle, an der laufende Kosten entstehen."
+  }
+}

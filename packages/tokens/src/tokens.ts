@@ -24,6 +24,10 @@ const scale = {
   red600: "#dc2626",
   green400: "#4ade80",
   green600: "#16a34a",
+  amber500: "#c9a227",
+  amber700: "#8a6f12",
+  teal400: "#5fa8a0",
+  teal700: "#3f7d74",
 } as const
 
 /** Semantic colours. Each names a job, and carries a value per scheme. */
@@ -39,6 +43,14 @@ export const color = {
   // banners. The marketplace grew this token first; the template carries it
   // now so every theme and every scaffolded app has it from the start.
   success: { light: scale.green600, dark: scale.green400 },
+  // Two tokens the default theme barely uses and Segel is built on. `brass` is
+  // for things the user *earned* — a stamped catch, a finished voyage — as
+  // opposed to things the app merely approves of, which is `success`. The
+  // distinction sounds precious until you have both on screen: praise that
+  // looks identical to a completed checkbox stops meaning anything.
+  // `seaglass` is the quieter half of that pair: correct, noticed, verified.
+  brass: { light: scale.amber700, dark: scale.amber500 },
+  seaglass: { light: scale.teal700, dark: scale.teal400 },
 } as const
 
 export const space = {
@@ -65,6 +77,7 @@ export const fontSize = {
   lg: "1.125rem",
   xl: "1.5rem",
   "2xl": "2rem",
+  "3xl": "2.75rem",
 } as const
 
 export const fontWeight = {
@@ -73,7 +86,14 @@ export const fontWeight = {
   semibold: "600",
 } as const
 
+/**
+ * `display` is separate from `sans` because headings and body have different
+ * jobs here: chart labels want a condensed grotesque, running text wants a
+ * humanist face at a generous size. Both are system stacks — a webfont would
+ * mean a network request on every load, which this app is built not to need.
+ */
 export const fontFamily = {
+  display: "'Oswald', 'Archivo Narrow', 'Haettenschweiler', 'Arial Narrow', ui-sans-serif, sans-serif",
   sans: "ui-sans-serif, system-ui, sans-serif",
   mono: "ui-monospace, SFMono-Regular, Menlo, monospace",
 } as const

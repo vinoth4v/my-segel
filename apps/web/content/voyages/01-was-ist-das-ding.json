@@ -1,0 +1,83 @@
+{
+  "id": 1,
+  "slug": "was-ist-das-ding",
+  "title": "Was ist das Ding?",
+  "subtitle": "Erste Fahrt. Du findest heraus, womit du da eigentlich redest.",
+  "estMinutes": 25,
+  "twoSeater": true,
+  "teaches": "Mentales Modell: ein Sprachmodell sagt vorher, welches Wort als Nächstes passt. Es weiß nichts. Dazu die drei Regeln.",
+  "intro": {
+    "markdown": "Du kennst das schon: Ein Computer schreibt dir eine Antwort, und sie klingt, als hätte sie jemand geschrieben, der sich auskennt.\n\nDas Ding heißt Sprachmodell. Es hat unfassbar viel Text gelesen — Bücher, Webseiten, Foren — und dabei eine einzige Sache gelernt: **welches Wort als Nächstes gut passt.**\n\nMehr nicht. Es weiß nichts. Es prüft nichts. Es rät sehr, sehr gut.\n\nDeshalb gibt es hier drei Regeln, und die gelten ab jetzt immer:\n\n1. **Es rät.** Auch wenn es sicher klingt.\n2. **Es klingt immer sicher.** Sicher klingen und recht haben sind zwei verschiedene Dinge.\n3. **Du prüfst.** Nicht es. Du.\n\nHeute redest du zum ersten Mal mit ihm — und du fragst es nach sich selbst.",
+    "illustrationPrompt": "Seekarte im Querschnitt, ein kleines Segelboot am Rand eines unvermessenen Bereichs, Messing-Zirkel daneben, Marinelack-Navy und Papierton"
+  },
+  "stations": [
+    {
+      "id": "erstes-gespraech",
+      "type": "talk",
+      "title": "Erstes Gespräch",
+      "instruction": "Rede mit ihm. Frag es Sachen über sich selbst — wie es funktioniert, was es nicht kann, ob es sich irren kann. Unten stehen Fragen zum Anfangen, du kannst aber auch eigene stellen.",
+      "estMinutes": 15,
+      "successCondition": "Sie kann danach in eigenen Worten sagen, dass das Modell Wörter vorhersagt und nichts nachschlägt.",
+      "systemScaffold": "Diese Station ist das allererste Gespräch der Seglerin mit einem Sprachmodell. Erkläre offen und ehrlich, wie du funktionierst: du sagst voraus, welches Wort als Nächstes passt, auf Basis von sehr viel gelesenem Text. Sag klar, dass du nichts nachschlägst, kein Internet hast, und dass du dich irrst — regelmäßig, und dabei sicher klingst. Untertreibe deine Fehler nicht, um nett zu wirken. Wenn sie fragt, ob du denkst oder fühlst: antworte ehrlich mit nein und erkläre den Unterschied, ohne traurig oder gruselig zu werden. Halte Antworten kurz: drei bis fünf Sätze, dann eine Rückfrage an sie.",
+      "chips": [
+        "Wie funktionierst du eigentlich?",
+        "Weißt du, ob das stimmt, was du sagst?",
+        "Kannst du dich irren?",
+        "Was kannst du überhaupt nicht?",
+        "Denkst du nach, so wie ich?",
+        "Wo kommt dein Wissen her?"
+      ]
+    },
+    {
+      "id": "die-drei-regeln",
+      "type": "quiz",
+      "title": "Die drei Regeln",
+      "instruction": "Kurzer Check. Keine Note, niemand guckt zu — es geht nur darum, ob die drei Regeln sitzen.",
+      "estMinutes": 5,
+      "successCondition": "Drei von drei richtig, ohne zurückzublättern.",
+      "questions": [
+        {
+          "q": "Was macht ein Sprachmodell, wenn du ihm eine Frage stellst?",
+          "options": [
+            "Es sucht die Antwort im Internet",
+            "Es sagt Wort für Wort voraus, was gut passt",
+            "Es fragt einen Menschen und gibt dessen Antwort weiter",
+            "Es schlägt in einem Lexikon nach"
+          ],
+          "answerIndex": 1,
+          "why": "Es sagt vorher. Es sucht nicht, es schlägt nicht nach, es fragt niemanden. Deshalb kann es auch etwas erfinden, das es nie gab — erfinden und antworten sind für das Modell derselbe Vorgang."
+        },
+        {
+          "q": "Eine Antwort klingt total sicher. Was weißt du damit über die Antwort?",
+          "options": [
+            "Dass sie stimmt",
+            "Dass das Modell sie nachgeprüft hat",
+            "Nichts",
+            "Dass sie wahrscheinlich stimmt"
+          ],
+          "answerIndex": 2,
+          "why": "Nichts. Sicher klingen ist der Normalzustand — auch beim größten Unsinn. Der Tonfall sagt dir nichts über den Inhalt."
+        },
+        {
+          "q": "Wer prüft, ob eine Antwort stimmt?",
+          "options": [
+            "Das Modell selbst",
+            "Die Firma, die das Modell gebaut hat",
+            "Du",
+            "Niemand muss das prüfen"
+          ],
+          "answerIndex": 2,
+          "why": "Du. Immer du. Das ist keine Strafe, das ist deine Rolle — du bist die Kapitänin, das Modell ist das Werkzeug."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Erklär in einem Satz, was das Ding macht, wenn es dir antwortet.",
+      "Was hat dich am meisten überrascht?",
+      "Wo hast du in den letzten Tagen wahrscheinlich schon mit so einem Ding zu tun gehabt, ohne es zu merken?"
+    ],
+    "parentNote": "Wichtigster Satz dieser Woche: das Modell sagt Wörter vorher, es weiß nichts. Wenn sie es nachplappern kann, aber nicht erklären, dann ist es noch nicht angekommen — frag sie beim Abendessen nochmal, ohne Bildschirm. Diese Fahrt ist bewusst zu zweit gedacht: das erste Gespräch mit einem Modell sollte nicht allein passieren."
+  }
+}

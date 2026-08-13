@@ -1,4 +1,12 @@
-/* Every value here comes from @werft/tokens. Add a token rather than a literal. */
+/* Every value here comes from @werft/tokens. Add a token rather than a literal.
+
+   Direction: harbour chart. A nautical instrument, not a cartoon boat — she is
+   ten and plays real games, so the failure modes are a purple-gradient chatbot
+   at one end and a primary-colour toy at the other.
+
+   The one thing that animates is the stamp landing on a catch. Everything else
+   is still on purpose: restraint is what keeps an app from reading as
+   generated, and a page where six things move teaches her that nothing matters. */
 
 *,
 *::before,
@@ -9,23 +17,111 @@
 body {
   margin: 0;
   font-family: var(--font-family-sans);
-  font-size: var(--font-size-base);
-  line-height: 1.5;
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
   color: var(--color-fg);
   background: var(--color-bg);
 }
 
+/* Body copy is a size up from the template default throughout. She reads
+   fluently but not fast, and small type is the quiet way to make an app feel
+   like it was not meant for her. */
+
 main {
-  max-width: 40rem;
+  max-width: 56rem;
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--space-8) var(--space-6) var(--space-12);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--space-4);
 }
 
 h1 {
-  margin: 0 0 var(--space-6);
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-3xl);
+  line-height: 1.1;
 }
+
+h2 {
+  font-size: var(--font-size-2xl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+/* ---------------------------------------------------------------- chrome -- */
+
+.deckhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6) 0;
+}
+
+.wordmark {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  text-decoration: none;
+}
+
+.deckhead nav {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--font-size-base);
+}
+
+.deckhead nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.deckhead nav a:hover {
+  color: var(--color-fg);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Chart labels: the small capitalised strings that title a region of a chart. */
+.chartlabel {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.lead {
+  font-size: var(--font-size-xl);
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------------- forms -- */
 
 label {
   display: inline-block;
@@ -35,9 +131,11 @@ label {
   color: var(--color-muted);
 }
 
-input {
+input,
+textarea,
+select {
   width: 100%;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-3);
   font: inherit;
   color: var(--color-fg);
   background: var(--color-surface);
@@ -45,18 +143,27 @@ input {
   border-radius: var(--radius-md);
 }
 
+textarea {
+  resize: vertical;
+  min-height: 5rem;
+}
+
 input:focus-visible,
-button:focus-visible {
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
-input:hover {
+input:hover,
+textarea:hover {
   border-color: var(--color-muted);
 }
 
 button {
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-6);
   font: inherit;
   font-weight: var(--font-weight-medium);
   color: var(--color-bg);
@@ -64,19 +171,183 @@ button {
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition:
-    filter 120ms ease,
-    transform 120ms ease;
+  transition: filter 120ms ease;
 }
 
-/* brightness, not a second colour: hover stays derived from the one accent
-   token instead of quietly becoming a token nobody can find. */
-button:hover {
+button:hover:not(:disabled) {
   filter: brightness(1.08);
 }
 
-button:active {
-  transform: translateY(1px);
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button.quiet {
+  color: var(--color-fg);
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+button.quiet:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  filter: none;
+}
+
+/* The catch button. Signal orange is reserved for actions, and this is *the*
+   action of the whole app — pressing it is what the six weeks are for. */
+button.catch {
+  background: var(--color-accent);
+  font-family: var(--font-family-display);
+  letter-spacing: 0.06em;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.chips button {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-base);
+  color: var(--color-fg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.chips button:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  filter: none;
+}
+
+/* ---------------------------------------------------------------- panels -- */
+
+.panel {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 48rem) {
+  .split,
+  .trio {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------- the ledger --
+
+   The Logbuch is the home screen and it is meant to look like an object: a
+   ruled ledger page that fills up over six weeks. Her progress should look
+   like something she made, not like a dashboard someone made for her. */
+
+.ledger {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  /* The rules of the page. Two gradients: the horizontal lines you write on,
+     and the single vertical margin rule down the left. */
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent calc(var(--space-8) - 1px),
+      var(--color-border) var(--space-8)
+    ),
+    linear-gradient(to right, transparent var(--space-12), var(--color-brass) var(--space-12));
+  background-size:
+    100% 100%,
+    calc(var(--space-12) + 1px) 100%;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.ledger-line {
+  display: grid;
+  grid-template-columns: var(--space-12) 1fr auto;
+  gap: var(--space-4);
+  align-items: baseline;
+  min-height: var(--space-8);
+  padding-left: var(--space-2);
+}
+
+.ledger-line + .ledger-line {
+  margin-top: var(--space-4);
+}
+
+.ledger-date {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-muted);
+}
+
+.ledger-quote {
+  display: block;
+  font-size: var(--font-size-base);
+  color: var(--color-muted);
+  margin-top: var(--space-1);
+}
+
+/* The brass stamp. One orchestrated moment in the whole app: it lands when a
+   catch is filed, and nothing else animates anywhere. */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+  border: 2px solid var(--color-brass);
+  border-radius: var(--radius-sm);
+  /* Sat slightly askew, the way a hand stamp lands. */
+  transform: rotate(-4deg);
+  white-space: nowrap;
+}
+
+.stamp.landing {
+  animation: stamp-land 420ms cubic-bezier(0.2, 1.4, 0.5, 1) both;
+}
+
+@keyframes stamp-land {
+  0% {
+    opacity: 0;
+    transform: rotate(-14deg) scale(2.4);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-2deg) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -88,10 +359,198 @@ button:active {
   }
 }
 
+/* --------------------------------------------------------------- voyages -- */
+
+.voyages {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-8);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.voyage {
+  display: grid;
+  grid-template-columns: var(--space-12) 1fr auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+}
+
+.voyage:hover {
+  border-color: var(--color-accent);
+}
+
+.voyage-number {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  color: var(--color-muted);
+}
+
+.voyage[data-state="done"] .voyage-number {
+  color: var(--color-brass);
+}
+
+.voyage h3 {
+  margin: 0;
+}
+
+.voyage p {
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--color-muted);
+}
+
+/* ------------------------------------------------------------ conversation -- */
+
+.turns {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.turn {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  white-space: pre-wrap;
+}
+
+.turn[data-role="segler"] {
+  border-left: 3px solid var(--color-accent);
+}
+
+.turn[data-role="schiff"] {
+  border-left: 3px solid var(--color-seaglass);
+}
+
+.turn[data-blocked="true"] {
+  border-left-color: var(--color-danger);
+  color: var(--color-muted);
+}
+
+.turn-who {
+  display: block;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* ------------------------------------------------------------------ meter -- */
+
+.meter {
+  display: flex;
+  gap: var(--space-1);
+  margin: var(--space-2) 0;
+}
+
+.meter span {
+  display: block;
+  height: var(--space-2);
+  flex: 1;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.meter span[data-on="true"] {
+  background: var(--color-seaglass);
+}
+
+/* ------------------------------------------------------------------ plates -- */
+
+.plate {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.plate-fallback {
+  padding: var(--space-4);
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.tell {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- artifact -- */
+
+.artifact-frame {
+  width: 100%;
+  height: 26rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+/* --------------------------------------------------------------- messages -- */
+
 [role="alert"] {
   padding: var(--space-3) var(--space-4);
   color: var(--color-danger);
   background: var(--color-surface);
   border: 1px solid var(--color-danger);
   border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.notice {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-fg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-brass);
+  border-left-width: 3px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.two-seater {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-base);
+}
+
+th,
+td {
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+th {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }

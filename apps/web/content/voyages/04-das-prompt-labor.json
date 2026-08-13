@@ -1,0 +1,82 @@
+{
+  "id": 4,
+  "slug": "das-prompt-labor",
+  "title": "Das Prompt-Labor",
+  "subtitle": "Dieselbe Frage, zweimal gestellt. Einmal schlecht, einmal gut.",
+  "estMinutes": 25,
+  "twoSeater": false,
+  "teaches": "Wie man fragt, bestimmt was man bekommt: Rolle, Genauigkeit, Grenzen, Länge. Und die Kontrolle liegt bei ihr, nicht beim Modell.",
+  "intro": {
+    "markdown": "Bis jetzt hast du geprüft, was rauskommt. Heute änderst du, was reingeht.\n\nEs ist immer **dasselbe** Modell auf beiden Seiten. Das ist wichtig — sonst wüsstest du nicht, ob die bessere Antwort an deiner Frage lag oder am Modell.\n\nLinks steht deine erste Frage. Rechts baust du sie um, mit vier Hebeln:\n\n- **Wer soll es sein?** — „Erklär es wie eine Tierärztin“\n- **Was genau?** — nicht „Hunde“, sondern „warum mein Hund nachts bellt“\n- **Was nicht?** — „keine Fachwörter“, „keine Liste“\n- **Wie lang?** — „drei Sätze“\n\nBeide laufen. Beide Antworten stehen nebeneinander. Du siehst den Unterschied selbst.\n\nOben gibt es einen Balken, der deine erste Frage bewertet, **bevor** du sie abschickst. Nicht um dich zu benoten — damit du siehst, was fehlt.",
+    "illustrationPrompt": "Zwei identische Messing-Schieblehren nebeneinander, unterschiedlich weit eingestellt, technische Zeichnung auf Papierton"
+  },
+  "stations": [
+    {
+      "id": "prompt-labor",
+      "type": "labor",
+      "title": "Prompt-Labor",
+      "instruction": "Schreib links deine Frage, so wie du sie normal stellen würdest. Dann bau rechts mit den Hebeln eine stärkere Version. Beide laufen gleichzeitig — schau, was sich ändert.",
+      "estMinutes": 20,
+      "successCondition": "Sie kann nach dem Vergleich sagen, welcher Hebel den größten Unterschied gemacht hat, und warum.",
+      "task": "Nimm etwas, das du wirklich wissen willst. Eine Erklärung, eine Idee, eine Geschichte — egal, Hauptsache es interessiert dich.",
+      "levers": [
+        {
+          "id": "rolle",
+          "label": "Wer soll es sein?",
+          "hint": "Eine Rolle ändert, welche Wörter das Modell für passend hält. Eine Tierärztin und ein Comedian erklären denselben Hund verschieden.",
+          "options": [
+            "wie eine Tierärztin",
+            "wie ein Segellehrer",
+            "wie eine Geschichtenerzählerin",
+            "wie jemand, der es einem Zehnjährigen erklärt",
+            "wie eine sehr genaue Wissenschaftlerin"
+          ]
+        },
+        {
+          "id": "genau",
+          "label": "Was genau?",
+          "hint": "Der stärkste Hebel von allen. Je enger die Frage, desto weniger kann das Modell danebengreifen.",
+          "options": [
+            "nur der eine Teil, der mich wirklich interessiert",
+            "mit einem konkreten Beispiel",
+            "bezogen auf meine Situation",
+            "Schritt für Schritt",
+            "und sag dazu, wie sicher du dir bist"
+          ]
+        },
+        {
+          "id": "nicht",
+          "label": "Was nicht?",
+          "hint": "Grenzen sind erlaubt. Was du wegnimmst, macht die Antwort oft besser als was du dazutust.",
+          "options": [
+            "keine Fachwörter",
+            "keine Aufzählung",
+            "nicht ausschweifen",
+            "keine erfundenen Zahlen",
+            "keine Wiederholung der Frage"
+          ]
+        },
+        {
+          "id": "laenge",
+          "label": "Wie lang?",
+          "hint": "Ohne Angabe wird es lang. Lang ist nicht gut, lang ist nur lang.",
+          "options": [
+            "in drei Sätzen",
+            "in einem Absatz",
+            "in genau fünf Punkten",
+            "so kurz wie möglich",
+            "so lang wie nötig, aber keinen Satz länger"
+          ]
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Welcher Hebel hat am meisten verändert?",
+      "War die längere Antwort auch die bessere?",
+      "Wie würdest du jemandem in einem Satz erklären, wie man gut fragt?"
+    ],
+    "parentNote": "Beide Seiten laufen bewusst auf demselben Modell — sonst ist der Vergleich wertlos, und das ist genau der Fehler, den fast jede Prompt-Anleitung im Netz macht. Die Erkenntnis, auf die es ankommt: 'Was nicht' und 'Wie lang' wirken meist stärker als eine ausgefallene Rolle. Wenn sie langsam tippt, tippen Sie ruhig für sie — die Übung ist das Denken, nicht die Tastatur."
+  }
+}

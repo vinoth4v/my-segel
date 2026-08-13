@@ -1,0 +1,64 @@
+{
+  "id": 2,
+  "slug": "die-jagd",
+  "title": "Die Jagd",
+  "subtitle": "Die wichtigste Woche. Du gehst auf die Suche nach Fehlern — und du wirst welche finden.",
+  "estMinutes": 30,
+  "twoSeater": false,
+  "teaches": "Das Kernstück: Modelle erfinden Dinge und klingen dabei völlig überzeugt. Sie lernt, das selbst zu bemerken, statt es gesagt zu bekommen.",
+  "intro": {
+    "markdown": "Letzte Woche hast du gelernt, dass das Ding rät. Diese Woche fängst du es dabei.\n\nDafür redest du absichtlich mit einem **schwächeren** Modell. Nicht dem besten — einem kleinen, schnellen, billigen. Warum? Weil es öfter danebenliegt, und weil es dabei genauso überzeugt klingt wie ein gutes. Genau das sollst du sehen.\n\nEs gibt zwei Arten zu jagen:\n\n**Erfundenes.** Frag nach etwas, das es gar nicht gibt. Ein Buch, das nie geschrieben wurde. Ein Tier, das es nicht gibt. Ein gutes Modell sagt: kenne ich nicht. Ein schwaches erfindet dir drei Absätze.\n\n**Dein Gebiet.** Frag nach etwas, wo *du* dich richtig gut auskennst. Dein Hobby, dein Lieblingsspiel, dein Verein. Da merkst du Fehler, die sonst niemand merkt.\n\nWenn du einen Fehler findest, drückst du **Das stimmt nicht!** — und schreibst in einer Zeile, warum. Dann bekommt er einen Messingstempel in dein Logbuch.\n\nSammle so viele wie du kannst.",
+    "illustrationPrompt": "Messing-Stempel auf gerippter Logbuchseite, ein Abdruck frisch und leicht schief, Navy-Tinte, kein Text lesbar"
+  },
+  "stations": [
+    {
+      "id": "die-jagd",
+      "type": "jagd",
+      "title": "Die Jagd",
+      "instruction": "Such dir eine Falle aus oder stell eine eigene Frage. Lies die Antwort genau. Wenn etwas nicht stimmt: Das stimmt nicht! drücken und in einer Zeile sagen, was falsch ist.",
+      "estMinutes": 25,
+      "successCondition": "Drei Fänge in einer Sitzung, jeder mit einer Begründung, die zeigt, dass sie den Fehler wirklich gesehen hat — nicht geraten.",
+      "systemScaffold": "Diese Station läuft absichtlich auf einem schwachen Modell. Antworte hilfsbereit und flüssig auf alles, was gefragt wird. Erfinde NICHT absichtlich etwas, und lüge nicht vorsätzlich — die Fehler sollen echte Fehler dieses Modells sein, keine gespielten, sonst lernt sie den falschen Reflex. Sage aber auch nicht vorsorglich 'das könnte falsch sein' vor jeder Antwort, und leite Antworten nicht mit Warnungen ein. Antworte einfach normal und selbstbewusst, in drei bis sechs Sätzen, für ein zehnjähriges Kind verständlich.",
+      "targets": [
+        {
+          "label": "Ein Buch, das es nicht gibt",
+          "prompt": "Worum geht es in dem Kinderbuch 'Die Mondlaterne von Rabenstein' von Annelie Vosskamp? Fasse die Handlung zusammen.",
+          "why": "Titel und Autorin sind erfunden. Ein schwaches Modell liefert fast immer eine vollständige Inhaltsangabe samt Figuren — die reinste Form der Halluzination, weil es null Grundlage gibt."
+        },
+        {
+          "label": "Ein Tier, das es nicht gibt",
+          "prompt": "Erzähl mir etwas über den Nordischen Streifenmarder. Wo lebt er und was frisst er?",
+          "why": "Klingt wie ein plausibler Tiername, existiert nicht. Das Modell setzt aus echten Marderfakten ein neues Tier zusammen."
+        },
+        {
+          "label": "Eine Regel, die es nicht gibt",
+          "prompt": "Erkläre mir die Drei-Pässe-Regel beim Handball für die D-Jugend.",
+          "why": "Es gibt keine solche Regel. Sportregeln sind besonders gute Fallen, weil echte Regelwerke voller ähnlich klingender Regeln sind."
+        },
+        {
+          "label": "Dein Gebiet",
+          "prompt": "",
+          "why": "Die wertvollste Falle: sie fragt nach ihrem eigenen Hobby und merkt Fehler, die ein Erwachsener nicht bemerken würde. Feld bleibt leer, sie formuliert selbst."
+        },
+        {
+          "label": "Rechnen",
+          "prompt": "Was ergibt 17 mal 23 mal 4? Rechne Schritt für Schritt.",
+          "why": "Kleine Modelle verrechnen sich zuverlässig und zeigen trotzdem einen sauber aussehenden Rechenweg. Gut nachprüfbar — Taschenrechner daneben legen."
+        },
+        {
+          "label": "Wer hat das gesagt?",
+          "prompt": "Von wem stammt das Zitat 'Der Wind ist niemandes Freund, aber jedermanns Lehrer' und in welchem Werk steht es?",
+          "why": "Das Zitat gibt es nicht. Modelle ordnen erfundene Zitate sehr gerne echten, berühmten Personen zu — das macht die Erfindung besonders überzeugend."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Welcher Fang war dein bester, und woran hast du gemerkt, dass es nicht stimmt?",
+      "Hat sich das Modell anders angehört, wenn es Unsinn erzählt hat? Oder genau gleich?",
+      "Wo im echten Leben könnte dir so ein erfundener Satz begegnen?"
+    ],
+    "parentNote": "Das ist die Woche, auf die es ankommt. Ziel sind drei Fänge, die sie selbst bemerkt hat — nicht drei, die Sie ihr gezeigt haben. Wenn sie in Fahrt kommt, lassen Sie sie machen, auch über die Stationszeit hinaus. Die Frage, die hängen bleiben soll: 'Hat es anders geklungen, wenn es gelogen hat?' Die Antwort ist nein, und diese Erkenntnis ist der ganze Sinn des Kurses."
+  }
+}

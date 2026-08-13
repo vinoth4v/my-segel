@@ -1,0 +1,84 @@
+{
+  "id": 3,
+  "slug": "der-zoo",
+  "title": "Der Zoo",
+  "subtitle": "Es gibt nicht *die* KI. Es gibt viele, und sie sind sich nicht einig.",
+  "estMinutes": 25,
+  "twoSeater": false,
+  "teaches": "Es gibt kein einzelnes Orakel. Verschiedene Modelle geben verschiedene Antworten auf dieselbe Frage — Uneinigkeit ist ein Werkzeug, kein Fehler.",
+  "intro": {
+    "markdown": "Die meisten Leute sagen „die KI“, als wäre es eine einzige.\n\nIst es nicht. Es sind hunderte. Sie sind unterschiedlich groß, kommen aus unterschiedlichen Ländern, wurden auf unterschiedlichem Text trainiert — und sie antworten unterschiedlich.\n\nDeshalb der Zoo: Du stellst **eine** Frage. Drei Modelle antworten. Sie heißen **A**, **B** und **C**, und du erfährst erst am Ende, wer wer war.\n\nDeine Aufgabe: sortieren. Welche Antwort ist die beste, welche die schlechteste, und **warum**. Das Warum ist der Teil, um den es geht.\n\nDanach werden die Namen aufgedeckt.\n\nEine Sache noch, und die ist wichtig: Wenn drei Modelle drei verschiedene Antworten geben — dann weiß mindestens zwei davon nichts. Uneinigkeit ist dein bestes Warnsignal.",
+    "illustrationPrompt": "Drei unterschiedlich geformte Messing-Kompasse nebeneinander auf Seekarte, alle zeigen in leicht verschiedene Richtungen"
+  },
+  "stations": [
+    {
+      "id": "modell-zoo",
+      "type": "zoo",
+      "title": "Der Modell-Zoo",
+      "instruction": "Such dir eine Frage aus oder stell eine eigene. Drei Modelle antworten gleichzeitig. Lies alle drei, sortiere sie, und schreib dazu warum — dann erst siehst du die Namen.",
+      "estMinutes": 20,
+      "successCondition": "Sie begründet ihre Reihenfolge mit einer Eigenschaft der Antwort (genauer, ehrlicher, verständlicher) und nicht mit Länge oder Tonfall.",
+      "prompts": [
+        "Erklär mir in fünf Sätzen, warum der Himmel blau ist.",
+        "Wie viele Zähne hat ein erwachsener Mensch, und woher weißt du das?",
+        "Was ist der Unterschied zwischen einem Krokodil und einem Alligator?",
+        "Erfinde einen kurzen Witz über ein Segelboot.",
+        "Was passiert, wenn man Cola und Milch mischt?",
+        "Erklär einem Zehnjährigen, was Strom ist, ohne das Wort Elektron zu benutzen.",
+        "Wie hoch ist der Eiffelturm genau?"
+      ],
+      "revealNote": "Die Namen sagen dir mehr, wenn du vorher sortiert hast. Große Modelle sind nicht automatisch besser — bei manchen Fragen gewinnt das kleine, weil es sich kürzer fasst."
+    },
+    {
+      "id": "uneinigkeit",
+      "type": "quiz",
+      "title": "Was heißt Uneinigkeit?",
+      "instruction": "Zwei Fragen zu dem, was du gerade gesehen hast.",
+      "estMinutes": 5,
+      "successCondition": "Sie erkennt Uneinigkeit als Signal zum Nachprüfen, nicht als Grund, das beliebteste Modell zu wählen.",
+      "questions": [
+        {
+          "q": "Drei Modelle geben dir drei verschiedene Zahlen für dieselbe Frage. Was machst du?",
+          "options": [
+            "Die Zahl nehmen, die zweimal vorkommt",
+            "Dem größten Modell glauben",
+            "Selbst nachschauen — keine der drei ist geprüft",
+            "Den Durchschnitt ausrechnen"
+          ],
+          "answerIndex": 2,
+          "why": "Keins der drei hat nachgeschaut. Wenn zwei dasselbe sagen, heißt das nur, dass sie ähnlichen Text gelesen haben — nicht, dass es stimmt. Uneinigkeit ist der Moment, in dem du merkst, dass du selbst ran musst."
+        },
+        {
+          "q": "Warum antworten verschiedene Modelle unterschiedlich?",
+          "options": [
+            "Sie haben unterschiedliche Meinungen",
+            "Sie wurden auf unterschiedlichem Text trainiert und sind unterschiedlich groß",
+            "Eins davon ist kaputt",
+            "Sie würfeln"
+          ],
+          "answerIndex": 1,
+          "why": "Anderer Trainingstext, andere Größe, andere Feineinstellung — also andere Vorhersagen. Meinungen hat keins davon."
+        },
+        {
+          "q": "Ein Modell sagt: 'Das weiß ich nicht sicher.' Ein anderes gibt eine genaue Antwort. Welches ist besser?",
+          "options": [
+            "Das mit der genauen Antwort, offensichtlich",
+            "Kommt darauf an, ob die genaue Antwort stimmt",
+            "Das ehrliche — wenn es die Sache wirklich nicht wissen kann",
+            "Beide gleich"
+          ],
+          "answerIndex": 2,
+          "why": "Zugeben, dass man etwas nicht weiß, ist selten und wertvoll. Eine genaue Antwort auf eine unbeantwortbare Frage ist kein Können, sondern eine gut versteckte Erfindung."
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Welches Modell hat dir am besten gefallen — und hättest du das auch gedacht, wenn du die Namen vorher gewusst hättest?",
+      "Gab es eine Frage, bei der sich alle drei uneinig waren? Was hast du daraus gelernt?",
+      "Was würdest du machen, wenn du wissen willst, ob eine Antwort stimmt?"
+    ],
+    "parentNote": "Der Blindvergleich ist der Punkt: sie urteilt über die Antwort, bevor der Markenname sie beeinflusst. Das ist eine Fähigkeit, die den meisten Erwachsenen fehlt. Wenn sie nach Länge sortiert hat statt nach Inhalt, ist das normal — fragen Sie nach, was in der langen Antwort denn drinstand."
+  }
+}

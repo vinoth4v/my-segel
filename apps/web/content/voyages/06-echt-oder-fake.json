@@ -1,0 +1,55 @@
+{
+  "id": 6,
+  "slug": "echt-oder-fake",
+  "title": "Echt oder Fake?",
+  "subtitle": "Letzte Fahrt. Dasselbe Auge, das du hier trainierst, brauchst du danach jeden Tag.",
+  "estMinutes": 25,
+  "twoSeater": true,
+  "teaches": "Bilder und Videos werden genauso vorhergesagt wie Sätze — mit denselben verräterischen Fehlern. Und der Transfer in ihren echten Feed.",
+  "intro": {
+    "markdown": "Ein Bildmodell macht dasselbe wie ein Sprachmodell, nur mit Pixeln: es sagt vorher, was gut aussieht. Nicht, was stimmt.\n\nDeshalb macht es Fehler an immer denselben Stellen — dort, wo Aussehen und Wirklichkeit auseinandergehen:\n\n- **Hände.** Finger sind schwer. Zähl sie.\n- **Schrift.** Buchstaben auf Schildern werden zu Buchstabensuppe.\n- **Physik.** Was hält das? Woran hängt das? Wo ist der Schatten?\n- **Licht.** Zwei Schatten in verschiedene Richtungen heißt: zwei Sonnen.\n- **Zählen.** Beine, Stuhlbeine, Zacken, Zähne — nachzählen lohnt fast immer.\n\nGleich siehst du sechs Schaubilder. Das sind gezeichnete Szenen, keine Fotos — und in manchen steckt genau so ein Fehler, wie ihn ein Bildmodell macht. Deine Aufgabe: **Stimmt hier alles, oder nicht?**\n\nEs geht ums Hinschauen. Erst entscheiden, dann bekommst du die Stellen markiert.\n\nUnd dann kommt die eigentliche Aufgabe, und die ist nicht in dieser App: **Schau dir heute Abend deinen echten Feed an.**",
+    "illustrationPrompt": "Lupe aus Messing über einer Fotografie, unter der Lupe wird das Bild zu einem Raster aus Punkten"
+  },
+  "stations": [
+    {
+      "id": "echt-oder-fake",
+      "type": "echt",
+      "title": "Echt oder Fake?",
+      "instruction": "Bei jedem Schaubild: stimmt alles, oder steckt ein Fehler drin? Entscheide zuerst, dann werden die Stellen markiert. Rate ruhig — falsch liegen ist hier der Teil, an dem man am meisten lernt.",
+      "estMinutes": 15,
+      "successCondition": "Sie benennt bei mindestens vier Bildern die Stelle, die sie überzeugt hat — nicht nur das Urteil, sondern den Grund.",
+      "plateIds": [
+        "haende",
+        "hafenfoto",
+        "marktschild",
+        "stuhl",
+        "schatten",
+        "spiegelung"
+      ]
+    },
+    {
+      "id": "letzte-runde",
+      "type": "talk",
+      "title": "Letzte Runde",
+      "instruction": "Letztes Gespräch. Erzähl ihm, was du in den sechs Wochen gelernt hast — und frag es Sachen, die du am Anfang nicht zu fragen gewusst hättest.",
+      "estMinutes": 10,
+      "successCondition": "Sie stellt mindestens eine Frage, die eine Nachprüfung verlangt statt einer Auskunft.",
+      "systemScaffold": "Dies ist das letzte Gespräch am Ende eines sechswöchigen Kurses über KI-Kompetenz. Die Seglerin hat gelernt: Modelle sagen Wörter vorher; sie klingen sicher und irren sich; es gibt viele verschiedene Modelle; wie man fragt, ändert die Antwort; auch Bilder werden vorhergesagt. Behandle sie als jemanden, der jetzt etwas weiß — nicht als Anfängerin. Wenn sie dir eine Fangfrage stellt, gib es offen zu und lobe die Frage kurz und ohne Überschwang. Ermutige sie, dich weiter zu prüfen. Drei bis fünf Sätze pro Antwort.",
+      "chips": [
+        "Was ist die schwerste Frage, die man dir stellen kann?",
+        "Woran merke ich, dass du gerade etwas erfindest?",
+        "Was hast du seit unserem ersten Gespräch dazugelernt?",
+        "Wobei sollte ich dir nie vertrauen?",
+        "Gibt es Fragen, die du nicht beantworten solltest?"
+      ]
+    }
+  ],
+  "debrief": {
+    "questions": [
+      "Welches Bild hat dich reingelegt, und warum?",
+      "Nenn drei Stellen, auf die du ab jetzt bei jedem Bild schaust.",
+      "Was sagst du jemandem, der glaubt, dass alles stimmt, was die KI sagt?"
+    ],
+    "parentNote": "Letzte Fahrt, wieder zu zweit. Die eigentliche Aufgabe passiert nach der App: setzen Sie sich heute Abend mit ihr vor ihren echten Feed und lassen Sie sie zeigen, was ihr auffällt. Das ist der Übertrag, auf den sechs Wochen hingearbeitet haben — ohne ihn bleibt es eine App, die sie gespielt hat. Der Erfolg zeigt sich nicht heute, sondern in sechs Wochen: fragt sie unaufgefordert nach, wenn irgendwo eine KI-Antwort auftaucht?"
+  }
+}

@@ -63,4 +63,15 @@ describe("themes", () => {
     expect(renderCss("kimi-terminal")).toContain("#f59e0b")
     expect(renderCss("werft")).not.toContain("#b0421f")
   })
+
+  it("segel carries the harbour-chart palette the app is designed around", () => {
+    // These four are named in the build spec, not incidental: navy ground,
+    // paper page, signal orange for actions, brass for earned things. A theme
+    // edit that loses one of them changes what the app is, so it fails here.
+    const css = renderCss("segel")
+    expect(css).toContain("#12263a")
+    expect(css).toContain("#ede3d0")
+    expect(css).toContain("#e8622c")
+    expect(css).toContain("#c9a227")
+  })
 })
