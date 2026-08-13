@@ -1,0 +1,22 @@
+{
+  "name": "my-segel",
+  "title": "Segel",
+  "description": "A guided AI literacy app for one 10-year-old and her father. Kompass gateway for the model roster, Claude for the seat next to her.",
+  "stack": [
+    "next",
+    "typescript",
+    "neon",
+    "drizzle",
+    "next-auth",
+    "vercel"
+  ],
+  "url": "",
+  "tags": [
+    "personal",
+    "learning",
+    "AI",
+    "children"
+  ],
+  "status": "prototype",
+  "private": false
+}
