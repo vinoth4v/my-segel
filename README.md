@@ -119,7 +119,7 @@ drawing named in `src/segel/art.ts`. A voyage naming a drawing that does not
 exist fails a test rather than rendering a bare heading.
 
 Otherwise: say what you want in the app's page on the
-[marketplace](https://werft-marketplace.vercel.app), or comment `@claude` on an
+[marketplace](https://werft-marketplace.vinothkannan.de), or comment `@claude` on an
 issue here. Either way Claude works on a branch and opens a pull request; five
 gates run against a real preview on its own database branch, and a human
 merges. Nothing reaches production on its own.
